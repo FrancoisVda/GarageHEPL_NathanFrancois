@@ -26,12 +26,13 @@ public class Authentification extends JDialog{
     public Authentification(JFrame parent, boolean modal)
     {
         super(parent, modal);
-        setTitle("Authentification d'un utilisateur");
+        setTitle("Garage HEPL - Authentification d'un utilisateur");
         setContentPane(authentificationPanel);
         setMinimumSize(new Dimension(450, 474));
         setModal(modal);
         setLocationRelativeTo(parent);
 
+        MainWindow = (ApplicationGestion)parent;
         listPeople = new Hashtable();
 
         Mechanic Francois = new Mechanic("Francois", "0493545984", "1", "test");
@@ -55,7 +56,7 @@ public class Authentification extends JDialog{
             }
         });
 
-        setVisible(true);
+        //setVisible(true);
     }
 
     private void authentificationUser()
@@ -78,11 +79,11 @@ public class Authentification extends JDialog{
             if(password.equals(((GarageStaff)listPeople.get(user)).getPassword()))
             {
                 System.out.println("Tu es connecté");
-                this.setVisible(false);
 
-//                MainWindow.setVisible(true);
-//                MainWindow.setVisibility(true);
-//                MainWindow.setUser(user.getText()); //TODO
+                this.setVisible(false);
+                MainWindow.setVisible(true);
+                MainWindow.setVisibility(true);
+                //MainWindow.setUser(user); //TODO
             // TODO verify if membre du personnel or extérieur habilité e
             }
             else

@@ -1,8 +1,5 @@
 package People;
 
-/*
- * @author Nathan Et Francois
- */
 public class Mechanic extends GarageStaff {
     String _speciality;
 

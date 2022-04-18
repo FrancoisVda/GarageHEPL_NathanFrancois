@@ -1,8 +1,5 @@
 package People;
 
-/*
- * @author Nathan Et Francois
- */
 public class Person {
     protected String _lastName;
     protected String _firstName;

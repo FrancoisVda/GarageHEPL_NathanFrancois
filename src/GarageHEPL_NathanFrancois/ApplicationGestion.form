@@ -23,7 +23,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value=""/>
+          <text value="-- libre --"/>
         </properties>
       </component>
       <component id="e692c" class="javax.swing.JLabel">
@@ -40,7 +40,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value="-- libre --"/>
+        </properties>
       </component>
       <component id="38952" class="javax.swing.JLabel" binding="Atelier">
         <constraints>
@@ -65,7 +67,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value="-- libre --"/>
+        </properties>
       </component>
       <component id="dd2a5" class="javax.swing.JLabel">
         <constraints>
@@ -81,7 +85,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value="-- libre --"/>
+        </properties>
       </component>
       <component id="f31fd" class="javax.swing.JLabel">
         <constraints>
@@ -97,7 +103,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <text value="-- vide --"/>
+        </properties>
       </component>
       <component id="5b8d1" class="javax.swing.JTextPane" binding="TP_Image">
         <constraints>
@@ -131,7 +139,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value=""/>
+          <text value="-- libre --"/>
         </properties>
       </component>
       <component id="cff22" class="javax.swing.JLabel">
@@ -202,6 +210,11 @@
           <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
+      <vspacer id="b1777">
+        <constraints>
+          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
     </children>
   </grid>
 </form>
