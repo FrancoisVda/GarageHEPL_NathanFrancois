@@ -2,7 +2,7 @@ package GarageHEPL_NathanFrancois;
 
 import javax.swing.*;
 
-public class Policlinique {
+public class ApplicationGestion {
     private JTextField TF_Pont1;
     private JTextField TF_Pont2;
     private JTextField TF_Pont3;

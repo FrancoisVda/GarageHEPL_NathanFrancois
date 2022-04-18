@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
 import People.*;
-import GarageHEPL_NathanFrancois.Policlinique;
 
 public class Authentification extends JDialog{
     private JPanel authentificationPanel;
@@ -22,7 +21,7 @@ public class Authentification extends JDialog{
     }
 
     Hashtable listPeople;
-    Policlinique MainWindow;
+    ApplicationGestion MainWindow;
 
     public Authentification(JFrame parent, boolean modal)
     {
