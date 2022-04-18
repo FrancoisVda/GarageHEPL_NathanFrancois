@@ -6,8 +6,8 @@ package People;
 
 public class Employee extends GarageStaff {
 
-    public Employee(String phoneNumber, String id)
+    public Employee(String firstName, String phoneNumber, String id, String password)
     {
-        super(phoneNumber, id);
+        super(firstName, phoneNumber, id, password);
     }
 }

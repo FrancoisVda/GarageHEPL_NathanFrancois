@@ -10,11 +10,21 @@ public abstract class GarageStaff extends Person implements Identifiable, AValid
     String _id;
     String _password;
 
-    public GarageStaff(String phoneNumber, String id)
+    public GarageStaff(String firstName, String phoneNumber, String id, String password)
     {
-        super(phoneNumber);
+        super(firstName, phoneNumber);
         _id = id;
-        _password = "";
+        _password = password;
+    }
+
+    public String getPassword()
+    {
+        return _password;
+    }
+
+    public void setPassword(String password)
+    {
+        _password = password;
     }
 
     @Override

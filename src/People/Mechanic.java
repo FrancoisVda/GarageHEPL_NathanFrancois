@@ -6,9 +6,9 @@ package People;
 public class Mechanic extends GarageStaff {
     String _speciality;
 
-    public Mechanic(String phoneNumber, String id)
+    public Mechanic(String firstName, String phoneNumber, String id, String password)
     {
-        super(phoneNumber, id);
+        super(firstName, phoneNumber, id, password);
         _speciality = "";
     }
 

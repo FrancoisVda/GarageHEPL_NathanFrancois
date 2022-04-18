@@ -9,8 +9,9 @@ public class Person {
     protected String _address;
     protected String _phoneNumber;
 
-    public Person(String phoneNumber)
+    public Person(String firstName, String phoneNumber)
     {
+        _firstName = firstName;
         _phoneNumber = phoneNumber;
     }
 
