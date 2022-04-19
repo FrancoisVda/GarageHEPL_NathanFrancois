@@ -150,4 +150,5 @@ public class ApplicationGestion extends JDialog {
         ApplicationGestion applicationGestion = new ApplicationGestion(null, true);
 
     }
+
 }

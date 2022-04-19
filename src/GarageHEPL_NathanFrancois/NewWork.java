@@ -2,8 +2,8 @@ package GarageHEPL_NathanFrancois;
 
 import javax.swing.*;
 
-public class NouveauTravail {
-    private JPanel panel1;
+public class NewWork {
+    private JPanel newWorkPanel;
     private JTextField TF_TypeVoiture;
     private JCheckBox CB_PlaqueBelge;
     private JCheckBox CB_New;
