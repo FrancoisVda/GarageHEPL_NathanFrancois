@@ -19,4 +19,8 @@ public class Customer extends Person{
         _idClient = idClient;
     }
 
+    public String toString() {
+        return _firstName + " (Client)";
+    }
+
 }

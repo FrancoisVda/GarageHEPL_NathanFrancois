@@ -93,14 +93,14 @@ public class ApplicationGestion extends JDialog {
         MI_Prevoir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Ouvrir Fenetre NewWork;
+                //TODO OPEN WINDOW NewWork;
             }
         });
 
         MI_PriseCharge.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Ouvrir Fenetre PriseEnChargeTravail;
+                //TODO OPEN WINDOW PriseEnChargeTravail;
             }
         });
 
@@ -143,14 +143,14 @@ public class ApplicationGestion extends JDialog {
 
         carType = new CarType("Ford", "Fiesta", 5);
         priorityCustomer = new Customer("Jean", "045655", 1);
-        Car FordFiesta = new Car("FF",carType, priorityCustomer);
+        Car FordFiesta = new Car("FF", true, carType, priorityCustomer);
 
         carType = new CarType("Nissan", "Quashqai", 5);
         priorityCustomer = new Customer("Mich", "044255", 2);
-        Car NissanQuashqai = new Car("NQ", carType, priorityCustomer);
+        Car NissanQuashqai = new Car("NQ", false,  carType, priorityCustomer);
 
-        listCar.put(FordFiesta.getId(), FordFiesta);
-        listCar.put(NissanQuashqai.getId(), NissanQuashqai);
+        listCar.put(FordFiesta.getRegistration(), FordFiesta);
+        listCar.put(NissanQuashqai.getRegistration(), NissanQuashqai);
 
     }
 
@@ -162,15 +162,15 @@ public class ApplicationGestion extends JDialog {
         Customer priorityCustomer;
 
         carType = new CarType("Ford", "Fiesta", 5);
-        priorityCustomer = new Customer("Jean", "04555", 1);
-        Car FordFiesta = new Car("FF",carType, priorityCustomer);
+        priorityCustomer = new Customer("Jean", "045655", 1);
+        Car FordFiesta = new Car("FF", true, carType, priorityCustomer);
 
         carType = new CarType("Nissan", "Quashqai", 5);
-        priorityCustomer = new Customer("Mich", "04555", 2);
-        Car NissanQuashqai = new Car("NQ", carType, priorityCustomer);
+        priorityCustomer = new Customer("Mich", "044255", 2);
+        Car NissanQuashqai = new Car("NQ", false,  carType, priorityCustomer);
 
-        listCar.put(FordFiesta.getId(), FordFiesta);
-        listCar.put(NissanQuashqai.getId(), NissanQuashqai);
+        listCar.put(FordFiesta.getRegistration(), FordFiesta);
+        listCar.put(NissanQuashqai.getRegistration(), NissanQuashqai);
 
     }
 

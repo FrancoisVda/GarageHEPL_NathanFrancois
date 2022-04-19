@@ -6,9 +6,9 @@ import Vehicle.Car;
 public class Repair extends Work{
     String _area;
 
-    public Repair(Mechanic mechanicResponsible, Car carTreated, String area)
+    public Repair(Mechanic mechanicResponsible, Car carTreated, String area, String note)
     {
-        super(mechanicResponsible, carTreated);
+        super(mechanicResponsible, carTreated, note);
         _area = area;
     }
 

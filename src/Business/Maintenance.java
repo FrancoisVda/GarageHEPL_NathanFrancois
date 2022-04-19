@@ -6,9 +6,9 @@ import Vehicle.Car;
 public class Maintenance extends Work{
     String _type;
 
-    public Maintenance(Mechanic mechanicResponsible, Car carTreated, String type)
+    public Maintenance(Mechanic mechanicResponsible, Car carTreated, String type, String note)
     {
-        super(mechanicResponsible, carTreated);
+        super(mechanicResponsible, carTreated, note);
         _type = type;
     }
 

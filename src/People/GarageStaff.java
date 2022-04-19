@@ -3,9 +3,7 @@ package People;
 import Authenticate.AValider;
 import Authenticate.Identifiable;
 
-/*
- * @author Nathan Et Francois
- */
+
 public abstract class GarageStaff extends Person implements Identifiable, AValider{
     String _id;
     String _password;
@@ -51,4 +49,6 @@ public abstract class GarageStaff extends Person implements Identifiable, AValid
         return true; // TODO search what we need to validate
         // HASTABLE statique
     }
+
+    public abstract String toString();
 }

@@ -6,4 +6,9 @@ public class Employee extends GarageStaff {
     {
         super(firstName, phoneNumber, id, password);
     }
+
+    @Override
+    public String toString() {
+        return _firstName + " (Employé)";
+    }
 }

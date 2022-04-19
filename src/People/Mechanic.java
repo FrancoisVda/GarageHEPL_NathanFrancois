@@ -9,10 +9,9 @@ public class Mechanic extends GarageStaff {
         _speciality = "";
     }
 
-    /* // ? TO WRITE IF NEEDS ?
-    public String toString()
-    {
-        return _libelle + " (" + this.getPrix()  + " EUR)";
+    @Override
+    public String toString() {
+        return _firstName + " (" + _speciality + ") ";
     }
-    */
+
 }
