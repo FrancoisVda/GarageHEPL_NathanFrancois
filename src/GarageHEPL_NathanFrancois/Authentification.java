@@ -31,8 +31,11 @@ public class Authentification extends JDialog{
         setMinimumSize(new Dimension(450, 474));
         setModal(modal);
         setLocationRelativeTo(parent);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         MainWindow = (ApplicationGestion)parent;
+        MainWindow.setVisible(true);
+
         listPeople = new Hashtable();
 
         Mechanic Francois = new Mechanic("Francois", "0493545984", "1", "test");
@@ -113,6 +116,7 @@ public class Authentification extends JDialog{
                 dialog.setVisible(true);
             }
         });
+        Authentification authentification = new Authentification(null, true);
 
     }
 

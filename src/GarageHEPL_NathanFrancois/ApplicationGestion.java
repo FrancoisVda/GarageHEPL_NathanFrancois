@@ -1,6 +1,8 @@
 package GarageHEPL_NathanFrancois;
 
+import People.Customer;
 import Vehicle.Car;
+import Vehicle.CarType;
 
 import javax.swing.*;
 import java.util.Hashtable;
@@ -36,6 +38,7 @@ public class ApplicationGestion extends javax.swing.JFrame {
         _user= user;
         this.setTitle("Restaurant \"Le gourmet audacieux \" : "+ user);
     }
+
     public String getUser()
     {
         return _user;
@@ -48,22 +51,51 @@ public class ApplicationGestion extends javax.swing.JFrame {
     {
         // TODO : afficher la date java.time.LocalTime.now();
 
-
         listCar = new Hashtable();
 
-         //Car FordFiesta = new Car()
+        CarType carType;
+        Customer priorityCustomer;
+
+        carType = new CarType("Ford", "Fiesta", 5);
+        priorityCustomer = new Customer("Jean", "04555", 1);
+        Car FordFiesta = new Car("FF",carType, priorityCustomer);
+
+        carType = new CarType("Nissan", "Quashqai", 5);
+        priorityCustomer = new Customer("Mich", "04555", 2);
+        Car NissanQuashqai = new Car("NQ", carType, priorityCustomer);
+
+        listCar.put(FordFiesta.getId(), FordFiesta);
+        listCar.put(NissanQuashqai.getId(), NissanQuashqai);
+
     }
 
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
-                ApplicationGestion MainWindow = new ApplicationGestion();
+//    public static void main(String args[]) {
+//        java.awt.EventQueue.invokeLater(new Runnable()
+//        {
+//            public void run()
+//            {
+//                ApplicationGestion MainWindow = new ApplicationGestion();
+//
+//                AuthentificationWindow = new Authentification(MainWindow,true);
+//                AuthentificationWindow.setVisible(true);
+//            }
+//        });
+//
+//    }
 
-                AuthentificationWindow = new Authentification(MainWindow,true);
-                AuthentificationWindow.setVisible(true);
+    public static void main(String[] args)
+    {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                ApplicationGestion dialog = new ApplicationGestion();
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
 
