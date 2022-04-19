@@ -14,7 +14,7 @@ public class Authentification extends JDialog{
     private JRadioButton exterieurHabiliteRadioButton;
     private JButton OKButton;
     private JButton annulerButton;
-    private JTextField passwordTextField;
+    private JPasswordField PF_Password;
 
     private void createUIComponents() {
         // TODO: place custom component creation code here
@@ -65,7 +65,7 @@ public class Authentification extends JDialog{
     private void authentificationUser()
     {
         String user = userTextField.getText();
-        String password = passwordTextField.getText();
+        String password = String.valueOf(PF_Password.getPassword());
 
         if(user.isEmpty() || password.isEmpty())
         {
