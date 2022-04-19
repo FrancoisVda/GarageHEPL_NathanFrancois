@@ -3,16 +3,19 @@ package GarageHEPL_NathanFrancois;
 import People.Customer;
 import Vehicle.Car;
 import Vehicle.CarType;
+import javafx.scene.input.Mnemonic;
 
 import javax.swing.*;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.PanelUI;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.Hashtable;
 
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Hashtable;
-import People.*;
 
 
 //extends javax.swing.JFrame
@@ -31,6 +34,8 @@ public class ApplicationGestion extends JDialog {
     private JRadioButton RB_Present;
     private JLabel Atelier;
     private JPanel applicationGestionPanel;
+    private JTextField TF_Date;
+    private JMenuBar MenuBar;
 
     static Authentification AuthentificationWindow;
     private boolean _visibility = false;
@@ -46,7 +51,7 @@ public class ApplicationGestion extends JDialog {
     public void setUser(String user)
     {
         _user= user;
-        this.setTitle("Restaurant \"Le gourmet audacieux \" : "+ user);
+        this.setTitle("Garage HEPL - Authentification d'un utilisateur : "+ user);
     }
 
     public String getUser()
@@ -68,8 +73,68 @@ public class ApplicationGestion extends JDialog {
         setLocationRelativeTo(this);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         // ---------- //
+        JPanel applicationGestionPanel = new JPanel();
+        //JMenuBar MenuBar = new JMenuBar();
+        JMenu M_Atelier = new JMenu("Atelier");
+        JMenu M_Materiel = new JMenu("Materiel");
+        JMenu M_Clients = new JMenu("Clients");
+        JMenu M_Factures = new JMenu("Factures");
+        JMenu M_Paramètres = new JMenu("Paramètres");
+        JMenu M_Aide = new JMenu("Aide");
 
-        // TODO : afficher la date java.time.LocalTime.now();
+        JMenuItem MI_Prevoir = new JMenuItem("Prévoir");
+        JMenuItem MI_PriseCharge = new JMenuItem("Prise En Charge");
+        JMenuItem MI_Termine = new JMenuItem("Terminé");
+        JMenuItem MI_Listes = new JMenuItem("Listes");
+        JMenuItem MI_Infos = new JMenuItem("Infos Système");
+        JMenuItem MI_Debuter = new JMenuItem("Pour Débuter");
+        JMenuItem MI_APropos = new JMenuItem("A Propos");
+
+        MI_Prevoir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Ouvrir Fenetre NewWork;
+            }
+        });
+
+        MI_PriseCharge.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Ouvrir Fenetre PriseEnChargeTravail;
+            }
+        });
+
+        MI_APropos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Ouvrir Fenetre A Propos;
+            }
+        });
+
+        M_Atelier.add(MI_Prevoir);
+        M_Atelier.add(MI_PriseCharge);
+        M_Atelier.add(MI_Termine);
+        M_Atelier.add(MI_Listes);
+
+        M_Paramètres.add(MI_Infos);
+
+        M_Aide.add(MI_Debuter);
+        M_Aide.add(MI_APropos);
+
+        MenuBar.add(M_Atelier);
+        MenuBar.add(M_Materiel);
+        MenuBar.add(M_Clients);
+        MenuBar.add(M_Factures);
+        MenuBar.add(Box.createHorizontalGlue());
+        MenuBar.add(M_Paramètres);
+        MenuBar.add(M_Aide);
+
+
+        Date today = new Date();
+        DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
+                DateFormat.SHORT,
+                DateFormat.SHORT);
+        TF_Date.setText(shortDateFormat.format(today));
 
         listCar = new Hashtable();
 
@@ -151,4 +216,7 @@ public class ApplicationGestion extends JDialog {
 
     }
 
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+    }
 }
