@@ -21,7 +21,7 @@ public class Authentification extends JDialog{
     }
 
     Hashtable listPeople;
-    ApplicationGestion MainWindow;
+    //ApplicationGestion MainWindow;
 
     public Authentification(JFrame parent, boolean modal)
     {
@@ -33,8 +33,8 @@ public class Authentification extends JDialog{
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        MainWindow = (ApplicationGestion)parent;
-        MainWindow.setVisible(true);
+        //MainWindow = (ApplicationGestion)parent;
+        //MainWindow.setVisible(true);
 
         listPeople = new Hashtable();
 
@@ -84,10 +84,10 @@ public class Authentification extends JDialog{
                 System.out.println("Tu es connecté");
 
                 this.setVisible(false);
-                MainWindow.setVisible(true);
-                MainWindow.setVisibility(true);
+//                MainWindow.setVisible(true);
+//                MainWindow.setVisibility(true);
                 //MainWindow.setUser(user); //TODO
-            // TODO verify if membre du personnel or extérieur habilité e
+            // TODO verify if member of staff or extern
             }
             else
             {
