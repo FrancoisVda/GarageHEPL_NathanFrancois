@@ -16,10 +16,6 @@ public class Authentification extends JDialog{
     private JButton annulerButton;
     private JPasswordField PF_Password;
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
-
     Hashtable listPeople;
     //ApplicationGestion MainWindow;
 
@@ -84,9 +80,10 @@ public class Authentification extends JDialog{
                 System.out.println("Tu es connecté");
 
                 this.setVisible(false);
+
 //                MainWindow.setVisible(true);
 //                MainWindow.setVisibility(true);
-                //MainWindow.setUser(user); //TODO
+//                MainWindow.setUser(user); //TODO
             // TODO verify if member of staff or extern
             }
             else

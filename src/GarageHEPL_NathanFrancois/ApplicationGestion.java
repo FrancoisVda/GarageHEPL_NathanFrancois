@@ -60,7 +60,7 @@ public class ApplicationGestion extends JDialog {
     }
 
     Hashtable listCar;
-
+    About AboutWindows;
 
     public ApplicationGestion(JFrame parent, boolean modal)
     {
@@ -68,13 +68,14 @@ public class ApplicationGestion extends JDialog {
         super(parent, modal);
         setTitle("Garage HEPL - Authentification d'un utilisateur");
         setContentPane(applicationGestionPanel);
-        setMinimumSize(new Dimension(450, 474));
+        setMinimumSize(new Dimension(700, 400));
         setModal(modal);
         setLocationRelativeTo(this);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         // ---------- //
-        JPanel applicationGestionPanel = new JPanel();
-        //JMenuBar MenuBar = new JMenuBar();
+
+        //AboutWindows = (About)parent;
+
         JMenu M_Atelier = new JMenu("Atelier");
         JMenu M_Materiel = new JMenu("Materiel");
         JMenu M_Clients = new JMenu("Clients");
@@ -107,7 +108,8 @@ public class ApplicationGestion extends JDialog {
         MI_APropos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Ouvrir Fenetre A Propos;
+                //TODO OPEN WINDOW About;
+                AboutWindows.setVisible(true);
             }
         });
 
