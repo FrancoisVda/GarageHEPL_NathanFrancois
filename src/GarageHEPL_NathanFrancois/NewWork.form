@@ -16,7 +16,7 @@
           <text value="Type De Voiture :"/>
         </properties>
       </component>
-      <component id="57ad9" class="javax.swing.JTextField" binding="TF_TypeVoiture">
+      <component id="57ad9" class="javax.swing.JTextField" binding="TF_CarType">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -34,7 +34,7 @@
           <text value="Immatriculation :"/>
         </properties>
       </component>
-      <component id="42ff4" class="javax.swing.JTextField" binding="TF_Immatriculation">
+      <component id="42ff4" class="javax.swing.JTextField" binding="TF_Registration">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -42,7 +42,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="2e509" class="javax.swing.JCheckBox" binding="CB_PlaqueBelge">
+      <component id="2e509" class="javax.swing.JCheckBox" binding="CB_BelgianPlate">
         <constraints>
           <grid row="1" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -66,13 +66,15 @@
           <text value="New"/>
         </properties>
       </component>
-      <component id="3dc8d" class="javax.swing.JComboBox" binding="CB_Proprietaire">
+      <component id="3dc8d" class="javax.swing.JComboBox" binding="CB_Owner">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="7" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <editable value="false"/>
+        </properties>
       </component>
-      <component id="c8f6c" class="javax.swing.JRadioButton" binding="RB_Entretien">
+      <component id="c8f6c" class="javax.swing.JRadioButton" binding="RB_Maintenance">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -88,11 +90,13 @@
           <text value="Type De Travail :"/>
         </properties>
       </component>
-      <component id="71809" class="javax.swing.JComboBox" binding="CB_TypeTravail">
+      <component id="71809" class="javax.swing.JComboBox" binding="CB_WorkType">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="7" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <model/>
+        </properties>
       </component>
       <component id="7dca1" class="javax.swing.JLabel">
         <constraints>
@@ -123,7 +127,7 @@
           <text value="OK"/>
         </properties>
       </component>
-      <component id="abe9c" class="javax.swing.JRadioButton" binding="RB_Reparation">
+      <component id="abe9c" class="javax.swing.JRadioButton" binding="RB_Repair">
         <constraints>
           <grid row="3" column="5" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -131,7 +135,7 @@
           <text value="Réparation"/>
         </properties>
       </component>
-      <component id="28be3" class="javax.swing.JButton" binding="B_Annuler">
+      <component id="28be3" class="javax.swing.JButton" binding="B_Cancel">
         <constraints>
           <grid row="7" column="6" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

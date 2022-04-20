@@ -1,32 +1,27 @@
 package GarageHEPL_NathanFrancois;
 
-import Business.Repair;
 import People.Customer;
-import People.GarageStaff;
-import People.Mechanic;
-import Vehicle.Car;
-import Vehicle.CarType;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Hashtable;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
 public class NewWork extends JDialog {
     private JPanel newWorkPanel;
-    private JTextField TF_TypeVoiture;
-    private JCheckBox CB_PlaqueBelge;
+    private JTextField TF_CarType;
+    private JCheckBox CB_BelgianPlate;
     private JCheckBox CB_New;
-    private JComboBox<String> CB_Proprietaire;
-    private JRadioButton RB_Entretien;
-    private JRadioButton RB_Reparation;
-    private JComboBox<String> CB_TypeTravail;
+    private JComboBox<String> CB_Owner;
+    private JRadioButton RB_Maintenance;
+    private JRadioButton RB_Repair;
+    private JComboBox<String> CB_WorkType;
     private JTextField TF_Instruction;
     private JButton B_OK;
-    private JButton B_Annuler;
-    private JTextField TF_Immatriculation;
+    private JButton B_Cancel;
+    private JTextField TF_Registration;
 
     public NewWork(JFrame parent, boolean modal)
     {
@@ -49,11 +44,13 @@ public class NewWork extends JDialog {
         Customer Claude = new Customer("Claude", "04495", 6);
         Customer Francois = new Customer("Francois", "041197", 7);
 
-        //CB_Proprietaire = new JComboBox();
-
-        CB_Proprietaire.addItem(Jean.toString());       // TODO :: WHY DOESNT DISPLAY IT ?
-        CB_Proprietaire.addItem(Marc.toString());
-
+        CB_Owner.addItem(Jean.toString());
+        CB_Owner.addItem(Marc.toString());
+        CB_Owner.addItem(Mounawar.toString());
+        CB_Owner.addItem(Luc.toString());
+        CB_Owner.addItem(Herman.toString());
+        CB_Owner.addItem(Claude.toString());
+        CB_Owner.addItem(Francois.toString());
         // INSERT DATA //
 
 
@@ -64,17 +61,31 @@ public class NewWork extends JDialog {
             }
         });
 
-        RB_Entretien.addActionListener(new ActionListener() {
+        B_Cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
+        RB_Maintenance.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 maitenanceIsSelected();
             }
         });
 
-        RB_Reparation.addActionListener(new ActionListener() {
+        RB_Repair.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 repairIsSelected();
+            }
+        });
+
+        CB_New.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                addCustommer();
             }
         });
 
@@ -82,36 +93,80 @@ public class NewWork extends JDialog {
 
     private void addNewWork()
     {
-        String registration = TF_Immatriculation.getText();
+        String carType = TF_CarType.getText();
+        String registration = TF_Registration.getText();
         String instruction = TF_Instruction.getText();
-        String carType = TF_TypeVoiture.getText();
-        Boolean maitenance = RB_Entretien.isSelected();
-        Boolean repair = RB_Entretien.isSelected();
-        Boolean belgianRegistration = CB_PlaqueBelge.isSelected();
+        Boolean belgianRegistration = CB_BelgianPlate.isSelected();
         Boolean newCustommer = CB_New.isSelected();
+        String owner = (String)CB_Owner.getSelectedItem();
+        Boolean maitenance = RB_Maintenance.isSelected();
+        Boolean repair = RB_Maintenance.isSelected();
+        String workType = (String)CB_WorkType.getSelectedItem();
 
-        //Repair IssueMotor = new Repair(Mechanic mechanicResponsible, Car carTreated, String area, String note)
+        String code;
 
-        if(registration.isEmpty() || carType.isEmpty())
+        if(registration.isEmpty() || carType.isEmpty() || owner.isEmpty() || workType.isEmpty())
         {
             JOptionPane.showMessageDialog(this, "Information manquante", "Réessayer", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
+        StringTokenizer st = new StringTokenizer(((String)TF_CarType.getText()));
+        String brand = st.nextToken("-");
+        String type = st.nextToken("-");
+        String door = st.nextToken("-");
+
+        System.out.println("[" + brand + ", " + type + ", " + door + "]");
+        System.out.println("PLAQUE BELGE : " + belgianRegistration.toString());
+
+
+        //TODO CREATE VECTOR TO RETURN TO APPLICATIONGESTION
+        Vector<String> allInformations = new Vector<>();
+        allInformations.add(brand);
+        allInformations.add(type);
+        allInformations.add(door);
+        allInformations.add(registration);
+        allInformations.add(belgianRegistration.toString());
+    }
+
+    private void addCustommer()
+    {
+        if(CB_New.isSelected() == true)
+        {
+            CB_Owner.setEditable(true);
+            CB_Owner.setSelectedItem("");
+        }
+        else
+        {
+            CB_Owner.setEditable(false);
+        }
     }
 
     private void maitenanceIsSelected()
     {
-        //RB_Entretien.doClick();
-        //TODO if RB_Entretien selected : RB_Reparation = false
+        if(RB_Repair.isSelected() == true)
+            RB_Repair.setSelected(false);
+
+        CB_WorkType.removeAllItems();
+        CB_WorkType.addItem("Gros entretien");
+        CB_WorkType.addItem("Moyen entretien");
+        CB_WorkType.addItem("Petit entretien");
+        CB_WorkType.addItem("Enorme entretien");
+        CB_WorkType.addItem("Minuscule entretien");
     }
 
     private void repairIsSelected()
     {
-        //RB_Entretien.doClick();
-        //TODO if RB_Reparation selected : RB_Entretien = false
-    }
+        if(RB_Maintenance.isSelected() == true)
+            RB_Maintenance.setSelected(false);
 
+        CB_WorkType.removeAllItems();
+        CB_WorkType.addItem("Problème moteur");
+        CB_WorkType.addItem("Fuite");
+        CB_WorkType.addItem("Flanc gauche");
+        CB_WorkType.addItem("Flanc droit");
+        CB_WorkType.addItem("Frein");
+    }
 
     public static void main(String[] args)
     {
@@ -127,6 +182,5 @@ public class NewWork extends JDialog {
                 dialog.setVisible(true);
             }
         });
-
     }
 }

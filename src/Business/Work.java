@@ -15,4 +15,6 @@ public abstract class Work {
         _note = note;
     }
 
+    public abstract String toString();
+
 }

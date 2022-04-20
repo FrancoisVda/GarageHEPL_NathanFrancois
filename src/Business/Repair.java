@@ -21,4 +21,9 @@ public class Repair extends Work{
     {
         _area = area;
     }
+
+    @Override
+    public String toString() {
+        return _note + " (Réparation)";
+    }
 }
