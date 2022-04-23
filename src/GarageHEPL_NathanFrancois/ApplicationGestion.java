@@ -3,11 +3,8 @@ package GarageHEPL_NathanFrancois;
 import People.Customer;
 import Vehicle.Car;
 import Vehicle.CarType;
-import javafx.scene.input.Mnemonic;
 
 import javax.swing.*;
-import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.PanelUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
@@ -37,7 +34,6 @@ public class ApplicationGestion extends JDialog {
     private JTextField TF_Date;
     private JMenuBar MenuBar;
 
-    static Authentification AuthentificationWindow;
     private boolean _visibility = false;
     public void setVisibility(boolean visible)
     {
@@ -60,7 +56,6 @@ public class ApplicationGestion extends JDialog {
     }
 
     Hashtable listCar;
-    About AboutWindows;
 
     public ApplicationGestion(JFrame parent, boolean modal)
     {
@@ -68,13 +63,11 @@ public class ApplicationGestion extends JDialog {
         super(parent, modal);
         setTitle("Garage HEPL - Authentification d'un utilisateur");
         setContentPane(applicationGestionPanel);
-        setMinimumSize(new Dimension(700, 400));
+        setMinimumSize(new Dimension(700, 370));
         setModal(modal);
         setLocationRelativeTo(this);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         // ---------- //
-
-        //AboutWindows = (About)parent;
 
         JMenu M_Atelier = new JMenu("Atelier");
         JMenu M_Materiel = new JMenu("Materiel");
@@ -93,29 +86,32 @@ public class ApplicationGestion extends JDialog {
 
         MI_Prevoir.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO OPEN WINDOW NewWork;
+            public void actionPerformed(ActionEvent e)
+            {
+                new NewWork(null,true).show();
             }
         });
 
         MI_PriseCharge.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO OPEN WINDOW PriseEnChargeTravail;
+            public void actionPerformed(ActionEvent e)
+            {
+                new PriseEnChargeTravail(null,true).show();
             }
         });
 
         MI_APropos.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO OPEN WINDOW About;
-                AboutWindows.setVisible(true);
+            public void actionPerformed(ActionEvent e)
+            {;
+                new About(null,true).show();
             }
         });
 
         M_Atelier.add(MI_Prevoir);
         M_Atelier.add(MI_PriseCharge);
         M_Atelier.add(MI_Termine);
+        M_Atelier.addSeparator();
         M_Atelier.add(MI_Listes);
 
         M_Paramètres.add(MI_Infos);
