@@ -21,22 +21,11 @@ public class Authentification extends JDialog{
     public Authentification(JFrame parent, boolean modal)
     {
         super(parent, modal);
-        setTitle("Garage HEPL - Authentification d'un utilisateur");
-        setContentPane(authentificationPanel);
-        setMinimumSize(new Dimension(450, 474));
-        setModal(modal);
-        setLocationRelativeTo(parent);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        Init(parent, modal);
 
-        listPeople = new Hashtable();
+        InsertData();
 
-        Mechanic Francois = new Mechanic("Francois", "0493545984", "1", "test");
-        Mechanic Nathan = new Mechanic("Nathan","0455", "2", "test");
-
-        listPeople.put(Francois.getFirstName(), Francois);
-        listPeople.put(Nathan.getFirstName(), Nathan);
-
-
+        // ACTION //
         OKButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,14 +33,34 @@ public class Authentification extends JDialog{
             }
         });
 
-        //
-
         annulerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
+        // ACTION //
+    }
+
+    private void Init(JFrame parent, boolean modal)
+    {
+        setTitle("Garage HEPL - Authentification d'un utilisateur");
+        setContentPane(authentificationPanel);
+        setMinimumSize(new Dimension(450, 474));
+        setModal(modal);
+        setLocationRelativeTo(parent);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    private void InsertData()
+    {
+        listPeople = new Hashtable();
+
+        Mechanic Francois = new Mechanic("Francois", "0493545984", "1", "test");
+        Mechanic Nathan = new Mechanic("Nathan","0455", "2", "test");
+
+        listPeople.put(Francois.getFirstName(), Francois);
+        listPeople.put(Nathan.getFirstName(), Nathan);
     }
 
     private void authentificationUser()

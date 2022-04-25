@@ -27,35 +27,11 @@ public class NewWork extends JDialog {
 
     public NewWork(JFrame parent, boolean modal)
     {
-        // INIT //
         super(parent, modal);
-        setTitle("Garage HEPL - Nouveau travail pour l'atelier");
-        setContentPane(newWorkPanel);
-        setMinimumSize(new Dimension(550, 500));
-        setModal(modal);
-        setLocationRelativeTo(this);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        // INIT //
+        Init(modal);
+        InsertData();
 
-        // INSERT DATA //
-        Customer Jean = new Customer("Jean", "049556", 1);
-        Customer Marc = new Customer("Marc", "044641", 2);
-        Customer Mounawar = new Customer("Mounawar", "045988", 3);
-        Customer Luc = new Customer("Luc", "045632", 4);
-        Customer Herman = new Customer("Herman", "042333", 5);
-        Customer Claude = new Customer("Claude", "04495", 6);
-        Customer Francois = new Customer("Francois", "041197", 7);
-
-        CB_Owner.addItem(Jean.toString());
-        CB_Owner.addItem(Marc.toString());
-        CB_Owner.addItem(Mounawar.toString());
-        CB_Owner.addItem(Luc.toString());
-        CB_Owner.addItem(Herman.toString());
-        CB_Owner.addItem(Claude.toString());
-        CB_Owner.addItem(Francois.toString());
-        // INSERT DATA //
-
-
+        // ACTION //
         B_OK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,7 +66,37 @@ public class NewWork extends JDialog {
                 addCustommer();
             }
         });
+        // ACTION //
 
+    }
+
+    private void Init(boolean modal)
+    {
+        setTitle("Garage HEPL - Nouveau travail pour l'atelier");
+        setContentPane(newWorkPanel);
+        setMinimumSize(new Dimension(550, 500));
+        setModal(modal);
+        setLocationRelativeTo(this);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }
+
+    private void InsertData()
+    {
+        Customer Jean = new Customer("Jean", "049556", 1);
+        Customer Marc = new Customer("Marc", "044641", 2);
+        Customer Mounawar = new Customer("Mounawar", "045988", 3);
+        Customer Luc = new Customer("Luc", "045632", 4);
+        Customer Herman = new Customer("Herman", "042333", 5);
+        Customer Claude = new Customer("Claude", "04495", 6);
+        Customer Francois = new Customer("Francois", "041197", 7);
+
+        CB_Owner.addItem(Jean.toString());
+        CB_Owner.addItem(Marc.toString());
+        CB_Owner.addItem(Mounawar.toString());
+        CB_Owner.addItem(Luc.toString());
+        CB_Owner.addItem(Herman.toString());
+        CB_Owner.addItem(Claude.toString());
+        CB_Owner.addItem(Francois.toString());
     }
 
     private void addNewWork()
@@ -104,7 +110,6 @@ public class NewWork extends JDialog {
         Boolean maitenance = RB_Maintenance.isSelected();
         Boolean repair = RB_Maintenance.isSelected();
         String workType = (String)CB_WorkType.getSelectedItem();
-
         String code;
 
         if(registration.isEmpty() || carType.isEmpty() || owner.isEmpty() || workType.isEmpty())
@@ -120,7 +125,6 @@ public class NewWork extends JDialog {
 
         System.out.println("[" + brand + ", " + type + ", " + door + "]");
         System.out.println("PLAQUE BELGE : " + belgianRegistration.toString());
-
 
         //TODO CREATE VECTOR TO RETURN TO APPLICATIONGESTION
         _allInformations.add(brand);
