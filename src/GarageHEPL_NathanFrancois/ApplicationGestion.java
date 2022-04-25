@@ -34,41 +34,31 @@ public class ApplicationGestion extends JDialog {
     private JTextField TF_Date;
     private JMenuBar MenuBar;
 
-    private boolean _visibility = false;
-    public void setVisibility(boolean visible)
-    {
-        _visibility = visible;
-    }
-    public boolean getVisibility()
-    {
-        return _visibility;
-    }
-    private String _user;
-    public void setUser(String user)
-    {
-        _user= user;
-        this.setTitle("Garage HEPL - Authentification d'un utilisateur : "+ user);
-    }
-
-    public String getUser()
-    {
-        return _user;
-    }
-
-    Hashtable listCar;
 
     public ApplicationGestion(JFrame parent, boolean modal)
     {
         // ---------- //
         super(parent, modal);
+        Init(modal);
+        // ---------- //
+
+        MenuBar();
+        TimeDisplay();
+        InsertData();
+    }
+
+    private void Init(boolean modal)
+    {
         setTitle("Garage HEPL - Authentification d'un utilisateur");
         setContentPane(applicationGestionPanel);
         setMinimumSize(new Dimension(700, 370));
         setModal(modal);
         setLocationRelativeTo(this);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        // ---------- //
+    }
 
+    private void MenuBar()
+    {
         JMenu M_Atelier = new JMenu("Atelier");
         JMenu M_Materiel = new JMenu("Materiel");
         JMenu M_Clients = new JMenu("Clients");
@@ -126,53 +116,36 @@ public class ApplicationGestion extends JDialog {
         MenuBar.add(Box.createHorizontalGlue());
         MenuBar.add(M_Paramètres);
         MenuBar.add(M_Aide);
+    }
 
+    private void InsertData()
+    {
+        Hashtable listCar;
+        listCar = new Hashtable();
 
+        CarType carType;
+        Customer priorityCustomer;
+
+        carType = new CarType("Ford", "Fiesta", 5);
+        priorityCustomer = new Customer("Jean", "045655", 1);
+        Car FordFiesta = new Car("FF", true, carType, priorityCustomer);
+
+        carType = new CarType("Nissan", "Quashqai", 5);
+        priorityCustomer = new Customer("Mich", "044255", 2);
+        Car NissanQuashqai = new Car("NQ", false,  carType, priorityCustomer);
+
+        listCar.put(FordFiesta.getRegistration(), FordFiesta);
+        listCar.put(NissanQuashqai.getRegistration(), NissanQuashqai);
+    }
+
+    private void TimeDisplay()
+    {
         Date today = new Date();
         DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
                 DateFormat.SHORT,
                 DateFormat.SHORT);
         TF_Date.setText(shortDateFormat.format(today));
-
-        listCar = new Hashtable();
-
-        CarType carType;
-        Customer priorityCustomer;
-
-        carType = new CarType("Ford", "Fiesta", 5);
-        priorityCustomer = new Customer("Jean", "045655", 1);
-        Car FordFiesta = new Car("FF", true, carType, priorityCustomer);
-
-        carType = new CarType("Nissan", "Quashqai", 5);
-        priorityCustomer = new Customer("Mich", "044255", 2);
-        Car NissanQuashqai = new Car("NQ", false,  carType, priorityCustomer);
-
-        listCar.put(FordFiesta.getRegistration(), FordFiesta);
-        listCar.put(NissanQuashqai.getRegistration(), NissanQuashqai);
-
     }
-
-    public ApplicationGestion()
-    {
-        listCar = new Hashtable();
-
-        CarType carType;
-        Customer priorityCustomer;
-
-        carType = new CarType("Ford", "Fiesta", 5);
-        priorityCustomer = new Customer("Jean", "045655", 1);
-        Car FordFiesta = new Car("FF", true, carType, priorityCustomer);
-
-        carType = new CarType("Nissan", "Quashqai", 5);
-        priorityCustomer = new Customer("Mich", "044255", 2);
-        Car NissanQuashqai = new Car("NQ", false,  carType, priorityCustomer);
-
-        listCar.put(FordFiesta.getRegistration(), FordFiesta);
-        listCar.put(NissanQuashqai.getRegistration(), NissanQuashqai);
-
-    }
-
-
 
 
     // USE WITH extends javax.swing.JFrame
