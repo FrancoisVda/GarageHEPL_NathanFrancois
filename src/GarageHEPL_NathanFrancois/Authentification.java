@@ -17,7 +17,6 @@ public class Authentification extends JDialog{
     private JPasswordField PF_Password;
 
     Hashtable listPeople;
-    //ApplicationGestion MainWindow;
 
     public Authentification(JFrame parent, boolean modal)
     {
@@ -28,9 +27,6 @@ public class Authentification extends JDialog{
         setModal(modal);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        //MainWindow = (ApplicationGestion)parent;
-        //MainWindow.setVisible(true);
 
         listPeople = new Hashtable();
 
@@ -48,14 +44,14 @@ public class Authentification extends JDialog{
             }
         });
 
+        //
+
         annulerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
-
-        //setVisible(true);
     }
 
     private void authentificationUser()
@@ -78,12 +74,9 @@ public class Authentification extends JDialog{
             if(password.equals(((GarageStaff)listPeople.get(user)).getPassword()))
             {
                 System.out.println("Tu es connecté");
+                this.dispose();
+                new ApplicationGestion(null,true).show();
 
-                this.setVisible(false);
-
-//                MainWindow.setVisible(true);
-//                MainWindow.setVisibility(true);
-//                MainWindow.setUser(user); //TODO
             // TODO verify if member of staff or extern
             }
             else

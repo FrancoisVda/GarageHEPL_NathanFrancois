@@ -186,7 +186,7 @@ public class ApplicationGestion extends JDialog {
 //                AuthentificationWindow = new Authentification(MainWindow,true);
 //                AuthentificationWindow.setVisible(true);
 //            }
-//        });
+//        };
 //
 //    }
 
@@ -196,18 +196,17 @@ public class ApplicationGestion extends JDialog {
     {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ApplicationGestion dialog = new ApplicationGestion(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-                ApplicationGestion MainWindow = new ApplicationGestion();
+                new Authentification(null,true).show();
 
-//                AuthentificationWindow = new Authentification(MainWindow,true);
-//                AuthentificationWindow.setVisible(true);
+//                ApplicationGestion dialog = new ApplicationGestion(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//                ApplicationGestion MainWindow = new ApplicationGestion();
             }
         });
         ApplicationGestion applicationGestion = new ApplicationGestion(null, true);

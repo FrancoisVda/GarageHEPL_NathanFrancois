@@ -23,6 +23,8 @@ public class NewWork extends JDialog {
     private JButton B_Cancel;
     private JTextField TF_Registration;
 
+    private Vector<String> _allInformations = new Vector<>();
+
     public NewWork(JFrame parent, boolean modal)
     {
         // INIT //
