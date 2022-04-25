@@ -29,7 +29,7 @@ public class NewWork extends JDialog {
         super(parent, modal);
         setTitle("Garage HEPL - Nouveau travail pour l'atelier");
         setContentPane(newWorkPanel);
-        setMinimumSize(new Dimension(450, 474));
+        setMinimumSize(new Dimension(550, 500));
         setModal(modal);
         setLocationRelativeTo(this);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
