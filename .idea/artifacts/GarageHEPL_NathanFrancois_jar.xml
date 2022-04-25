@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GarageHEPL_NathanFrancois:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/GarageHEPL_NathanFrancois_jar</output-path>
+    <root id="archive" name="GarageHEPL_NathanFrancois.jar">
+      <element id="module-output" name="GarageHEPL_NathanFrancois" />
+    </root>
+  </artifact>
+</component>
