@@ -121,12 +121,17 @@ public class NewWork extends JDialog {
 
 
         //TODO CREATE VECTOR TO RETURN TO APPLICATIONGESTION
-        Vector<String> allInformations = new Vector<>();
-        allInformations.add(brand);
-        allInformations.add(type);
-        allInformations.add(door);
-        allInformations.add(registration);
-        allInformations.add(belgianRegistration.toString());
+        _allInformations.add(brand);
+        _allInformations.add(type);
+        _allInformations.add(door);
+        _allInformations.add(registration);
+        _allInformations.add(belgianRegistration.toString());
+        _allInformations.add(newCustommer.toString());
+        _allInformations.add(owner);
+        _allInformations.add(maitenance.toString());         // Use to know if it's maitenance or repair
+        _allInformations.add(workType);
+        _allInformations.add(instruction);
+
     }
 
     private void addCustommer()
