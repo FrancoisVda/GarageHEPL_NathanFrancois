@@ -26,6 +26,19 @@ public class Authentification extends JDialog{
         InsertData();
 
         // ACTION //
+
+        // ACTION //
+    }
+
+    private void Init(JFrame parent, boolean modal)
+    {
+        setTitle("Garage HEPL - Authentification d'un utilisateur");
+        setContentPane(authentificationPanel);
+        setMinimumSize(new Dimension(450, 474));
+        setModal(modal);
+        setLocationRelativeTo(parent);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
         OKButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -39,17 +52,6 @@ public class Authentification extends JDialog{
                 dispose();
             }
         });
-        // ACTION //
-    }
-
-    private void Init(JFrame parent, boolean modal)
-    {
-        setTitle("Garage HEPL - Authentification d'un utilisateur");
-        setContentPane(authentificationPanel);
-        setMinimumSize(new Dimension(450, 474));
-        setModal(modal);
-        setLocationRelativeTo(parent);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     private void InsertData()
@@ -83,8 +85,10 @@ public class Authentification extends JDialog{
             if(password.equals(((GarageStaff)listPeople.get(user)).getPassword()))
             {
                 System.out.println("Tu es connecté");
+
                 this.dispose();
-                new ApplicationGestion(null,true).show();
+                ApplicationGestion applicationGestion = new ApplicationGestion();
+                applicationGestion.setVisible(true);
 
             // TODO verify if member of staff or extern
             }
@@ -100,23 +104,4 @@ public class Authentification extends JDialog{
         }
 
     }
-
-    public static void main(String[] args)
-    {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Authentification dialog = new Authentification(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-        Authentification authentification = new Authentification(null, true);
-
-    }
-
 }

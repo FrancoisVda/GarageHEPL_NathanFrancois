@@ -16,7 +16,7 @@ import java.awt.*;
 
 
 //extends javax.swing.JFrame
-public class ApplicationGestion extends JDialog {
+public class ApplicationGestion extends JFrame {
     private JTextField TF_Pont1;
     private JTextField TF_Pont2;
     private JTextField TF_Pont3;
@@ -34,27 +34,24 @@ public class ApplicationGestion extends JDialog {
     private JTextField TF_Date;
     private JMenuBar MenuBar;
 
+    private static ApplicationGestion applicationGestion = new ApplicationGestion();
 
-    public ApplicationGestion(JFrame parent, boolean modal)
+
+    public ApplicationGestion()
     {
-        // ---------- //
-        super(parent, modal);
-        Init(modal);
-        // ---------- //
-
+        Init();
         MenuBar();
         TimeDisplay();
         InsertData();
     }
 
-    private void Init(boolean modal)
+    private void Init()
     {
         setTitle("Garage HEPL - Authentification d'un utilisateur");
         setContentPane(applicationGestionPanel);
         setMinimumSize(new Dimension(700, 370));
-        setModal(modal);
         setLocationRelativeTo(this);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     private void MenuBar()
@@ -78,7 +75,8 @@ public class ApplicationGestion extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                new NewWork(null,true).show();
+                NewWork newWork = new NewWork(applicationGestion,true);
+                newWork.setVisible(true);
             }
         });
 
@@ -147,31 +145,16 @@ public class ApplicationGestion extends JDialog {
         TF_Date.setText(shortDateFormat.format(today));
     }
 
-
-    // USE WITH extends javax.swing.JFrame
-//    public static void main(String args[]) {
-//        java.awt.EventQueue.invokeLater(new Runnable()
-//        {
-//            public void run()
-//            {
-//                ApplicationGestion MainWindow = new ApplicationGestion();
-//
-//                AuthentificationWindow = new Authentification(MainWindow,true);
-//                AuthentificationWindow.setVisible(true);
-//            }
-//        };
-//
-//    }
-
-
     // Use for display solo
     public static void main(String[] args)
     {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Authentification(null,true).show();
 
-//                ApplicationGestion dialog = new ApplicationGestion(new javax.swing.JFrame(), true);
+                Authentification authentification = new Authentification(applicationGestion,true);
+                authentification.setVisible(true);
+
+//                ApplicationGestion dialog = new ApplicationGestion(, true);
 //                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 //                    @Override
 //                    public void windowClosing(java.awt.event.WindowEvent e) {
@@ -182,11 +165,8 @@ public class ApplicationGestion extends JDialog {
 //                ApplicationGestion MainWindow = new ApplicationGestion();
             }
         });
-        ApplicationGestion applicationGestion = new ApplicationGestion(null, true);
+
 
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
 }
