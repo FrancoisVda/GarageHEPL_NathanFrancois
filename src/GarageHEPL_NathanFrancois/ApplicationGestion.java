@@ -3,6 +3,7 @@ package GarageHEPL_NathanFrancois;
 import People.Customer;
 import Vehicle.Car;
 import Vehicle.CarType;
+import jdk.nashorn.internal.objects.Global;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -30,7 +31,7 @@ public class ApplicationGestion extends JFrame {
     private JCheckBox CB_Pause;
     private JRadioButton RB_Present;
     private JLabel Atelier;
-    private JPanel applicationGestionPanel;
+    private JPanel JP_ApplicationGestion;
     private JTextField TF_Date;
     private JMenuBar MenuBar;
 
@@ -48,7 +49,7 @@ public class ApplicationGestion extends JFrame {
     private void Init()
     {
         setTitle("Garage HEPL - Authentification d'un utilisateur");
-        setContentPane(applicationGestionPanel);
+        setContentPane(JP_ApplicationGestion);
         setMinimumSize(new Dimension(700, 370));
         setLocationRelativeTo(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -56,6 +57,7 @@ public class ApplicationGestion extends JFrame {
 
     private void MenuBar()
     {
+
         JMenu M_Atelier = new JMenu("Atelier");
         JMenu M_Materiel = new JMenu("Materiel");
         JMenu M_Clients = new JMenu("Clients");
@@ -67,6 +69,9 @@ public class ApplicationGestion extends JFrame {
         JMenuItem MI_PriseCharge = new JMenuItem("Prise En Charge");
         JMenuItem MI_Termine = new JMenuItem("Terminé");
         JMenuItem MI_Listes = new JMenuItem("Listes");
+        JMenuItem MI_CentralePieces = new JMenuItem("Centrale Pieces");
+        JMenuItem MI_CentralePneus = new JMenuItem("Centrale Pneus");
+        JMenuItem MI_CentraleLubrifiants = new JMenuItem("Centrale Lubrifiants");
         JMenuItem MI_Infos = new JMenuItem("Infos Système");
         JMenuItem MI_Debuter = new JMenuItem("Pour Débuter");
         JMenuItem MI_APropos = new JMenuItem("A Propos");
@@ -84,7 +89,8 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                new PriseEnChargeTravail(null,true).show();
+                PriseEnChargeTravail PriseEnChargeTravail = new PriseEnChargeTravail(applicationGestion,true);
+                PriseEnChargeTravail.setVisible(true);
             }
         });
 
@@ -92,7 +98,44 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {;
-                new About(null,true).show();
+                About About = new About(applicationGestion,true);
+                About.setVisible(true);
+
+            }
+        });
+
+        MI_CentralePieces.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {;
+                ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(applicationGestion,true);
+                ApplicationCentrale.setVisible(true);
+                ApplicationCentrale.setTitle("Centrale Achat - Pieces");
+                //Choix = "Pieces";
+            }
+        });
+
+        MI_CentralePneus.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {;
+                ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(applicationGestion,true);
+                ApplicationCentrale.setVisible(true);
+                ApplicationCentrale.setTitle("Centrale Achat - Pneus");
+                //Choix = "Pneus";
+
+            }
+        });
+
+        MI_CentraleLubrifiants.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {;
+                ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(applicationGestion,true);
+                ApplicationCentrale.setVisible(true);
+                ApplicationCentrale.setTitle("Centrale Achat - Lubrifiants");
+                //Choix = "Lubrifiants";
+
             }
         });
 
@@ -101,6 +144,10 @@ public class ApplicationGestion extends JFrame {
         M_Atelier.add(MI_Termine);
         M_Atelier.addSeparator();
         M_Atelier.add(MI_Listes);
+
+        M_Materiel.add(MI_CentralePieces);
+        M_Materiel.add(MI_CentralePneus);
+        M_Materiel.add(MI_CentraleLubrifiants);
 
         M_Paramètres.add(MI_Infos);
 
