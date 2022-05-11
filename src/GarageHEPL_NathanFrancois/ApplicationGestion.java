@@ -9,13 +9,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.Hashtable;
+import java.util.*;
 
 
 import java.awt.*;
-import java.util.Vector;
 
 
 //extends javax.swing.JFrame
@@ -38,10 +35,7 @@ public class ApplicationGestion extends JFrame {
     private JMenuBar MenuBar;
 
     private Vector<String> _allInformationsNewWork = new Vector<>();
-    public NewWork newWork = new NewWork(this,true);
-    public PriseEnChargeTravail PriseEnChargeTravail = new PriseEnChargeTravail(this,true);
-    public About About = new About(this,true);
-    public ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(this,true);
+    LinkedList<Vector<String>> _llWork = new LinkedList<>();
 
     public ApplicationGestion()
     {
@@ -85,6 +79,7 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                NewWork newWork = new NewWork(ApplicationGestion.this,true);
                 newWork.setVisible(true);
 
                 Enumeration enu = _allInformationsNewWork.elements();
@@ -101,6 +96,7 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                PriseEnChargeTravail PriseEnChargeTravail = new PriseEnChargeTravail(ApplicationGestion.this,true);
                 PriseEnChargeTravail.setVisible(true);
             }
         });
@@ -109,6 +105,7 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {;
+                About About = new About(ApplicationGestion.this,true);
                 About.setVisible(true);
             }
         });
@@ -117,6 +114,7 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {;
+                ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(ApplicationGestion.this,true);
                 ApplicationCentrale.setVisible(true);
                 ApplicationCentrale.setTitle("Centrale Achat - Pieces");
                 //Choix = "Pieces";
@@ -127,6 +125,7 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {;
+                ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(ApplicationGestion.this,true);
                 ApplicationCentrale.setVisible(true);
                 ApplicationCentrale.setTitle("Centrale Achat - Pneus");
                 //Choix = "Pneus";
@@ -138,6 +137,7 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {;
+                ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(ApplicationGestion.this,true);
                 ApplicationCentrale.setVisible(true);
                 ApplicationCentrale.setTitle("Centrale Achat - Lubrifiants");
                 //Choix = "Lubrifiants";
@@ -201,6 +201,7 @@ public class ApplicationGestion extends JFrame {
     public void SetAllInformationNewWork(Vector<String> allInformationsNewWork)
     {
         _allInformationsNewWork = allInformationsNewWork;
+        _llWork.add(_allInformationsNewWork);
     }
 
     public static void main(String[] args)
