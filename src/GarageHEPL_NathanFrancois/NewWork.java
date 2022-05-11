@@ -24,12 +24,15 @@ public class NewWork extends JDialog {
     private JTextField TF_Registration;
 
     private Vector<String> _allInformations = new Vector<>();
+    public ApplicationGestion parentApplicationGestion;
 
-    public NewWork(JFrame parent, boolean modal)
+    public NewWork(ApplicationGestion parent, boolean modal)
     {
         super(parent, modal);
+        this.parentApplicationGestion = parent;
         Init(modal);
         InsertData();
+
 
         // ACTION //
         B_OK.addActionListener(new ActionListener() {
@@ -67,6 +70,7 @@ public class NewWork extends JDialog {
             }
         });
         // ACTION //
+
 
     }
 
@@ -138,6 +142,8 @@ public class NewWork extends JDialog {
         _allInformations.add(workType);
         _allInformations.add(instruction);
 
+        parentApplicationGestion.SetAllInformationNewWork(_allInformations);
+        this.dispose();
     }
 
     private void addCustommer()
@@ -179,19 +185,21 @@ public class NewWork extends JDialog {
         CB_WorkType.addItem("Frein");
     }
 
-    public static void main(String[] args)
-    {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                NewWork dialog = new NewWork(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String[] args)
+//    {
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                NewWork dialog = new NewWork(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
+
+
 }

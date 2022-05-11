@@ -9,10 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Hashtable;
 
 
 import java.awt.*;
+import java.util.Vector;
 
 
 //extends javax.swing.JFrame
@@ -34,8 +36,8 @@ public class ApplicationGestion extends JFrame {
     private JTextField TF_Date;
     private JMenuBar MenuBar;
 
-    private static ApplicationGestion applicationGestion = new ApplicationGestion();
-
+    private Vector<String> _allInformationsNewWork = new Vector<>();
+    public NewWork newWork = new NewWork(this,true);
 
     public ApplicationGestion()
     {
@@ -75,8 +77,15 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                NewWork newWork = new NewWork(applicationGestion,true);
                 newWork.setVisible(true);
+
+                Enumeration enu = _allInformationsNewWork.elements();
+                System.out.println("APPLI GESTION :: The enumeration of values are:");
+
+                // Displaying the Enumeration
+                while (enu.hasMoreElements()) {
+                    System.out.println("ELEMENT : " + enu.nextElement());
+                }
             }
         });
 
@@ -145,28 +154,19 @@ public class ApplicationGestion extends JFrame {
         TF_Date.setText(shortDateFormat.format(today));
     }
 
-    // Use for display solo
+    public void SetAllInformationNewWork(Vector<String> allInformationsNewWork)
+    {
+        _allInformationsNewWork = allInformationsNewWork;
+    }
+
     public static void main(String[] args)
     {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                Authentification authentification = new Authentification(applicationGestion,true);
+                Authentification authentification = new Authentification(new ApplicationGestion(),true);
                 authentification.setVisible(true);
-
-//                ApplicationGestion dialog = new ApplicationGestion(, true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//                ApplicationGestion MainWindow = new ApplicationGestion();
             }
         });
-
-
     }
-
 }
