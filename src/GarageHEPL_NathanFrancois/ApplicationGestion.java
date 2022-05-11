@@ -3,7 +3,6 @@ package GarageHEPL_NathanFrancois;
 import People.Customer;
 import Vehicle.Car;
 import Vehicle.CarType;
-import jdk.nashorn.internal.objects.Global;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -96,7 +95,7 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                PriseEnChargeTravail PriseEnChargeTravail = new PriseEnChargeTravail(ApplicationGestion.this,true);
+                TakingOverJob PriseEnChargeTravail = new TakingOverJob(ApplicationGestion.this,true);
                 PriseEnChargeTravail.setVisible(true);
             }
         });

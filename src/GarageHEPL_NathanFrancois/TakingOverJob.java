@@ -3,7 +3,7 @@ package GarageHEPL_NathanFrancois;
 import javax.swing.*;
 import java.awt.*;
 
-public class PriseEnChargeTravail extends JDialog {
+public class TakingOverJob extends JDialog {
     private JList L_TravauxEnAttente;
     private JRadioButton RB_Pont;
     private JComboBox CB_Pont;
@@ -12,15 +12,19 @@ public class PriseEnChargeTravail extends JDialog {
     private JButton B_Annuler;
     private JPanel JP_PriseChargeTravail;
 
-    public PriseEnChargeTravail(JFrame parent, boolean modal) {
-        // ---------- //
+    public TakingOverJob(JFrame parent, boolean modal)
+    {
         super(parent, modal);
+        Init(modal);
+    }
+
+    private void Init(boolean modal)
+    {
         setTitle("Prise En Charge Travail");
         setContentPane(JP_PriseChargeTravail);
         setMinimumSize(new Dimension(700, 400));
         setModal(modal);
         setLocationRelativeTo(this);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        // ---------- //
     }
 }
