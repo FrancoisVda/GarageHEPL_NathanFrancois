@@ -39,6 +39,9 @@ public class ApplicationGestion extends JFrame {
 
     private Vector<String> _allInformationsNewWork = new Vector<>();
     public NewWork newWork = new NewWork(this,true);
+    public PriseEnChargeTravail PriseEnChargeTravail = new PriseEnChargeTravail(this,true);
+    public About About = new About(this,true);
+    public ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(this,true);
 
     public ApplicationGestion()
     {
@@ -98,7 +101,6 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                PriseEnChargeTravail PriseEnChargeTravail = new PriseEnChargeTravail(applicationGestion,true);
                 PriseEnChargeTravail.setVisible(true);
             }
         });
@@ -107,9 +109,7 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {;
-                About About = new About(applicationGestion,true);
                 About.setVisible(true);
-
             }
         });
 
@@ -117,7 +117,6 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {;
-                ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(applicationGestion,true);
                 ApplicationCentrale.setVisible(true);
                 ApplicationCentrale.setTitle("Centrale Achat - Pieces");
                 //Choix = "Pieces";
@@ -128,7 +127,6 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {;
-                ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(applicationGestion,true);
                 ApplicationCentrale.setVisible(true);
                 ApplicationCentrale.setTitle("Centrale Achat - Pneus");
                 //Choix = "Pneus";
@@ -140,7 +138,6 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {;
-                ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(applicationGestion,true);
                 ApplicationCentrale.setVisible(true);
                 ApplicationCentrale.setTitle("Centrale Achat - Lubrifiants");
                 //Choix = "Lubrifiants";
