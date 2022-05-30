@@ -32,12 +32,19 @@ public class ApplicationGestion extends JFrame {
     private Vector<String> _allInformationsNewWork = new Vector<>();
     LinkedList<Vector<String>> _llWork = new LinkedList<>();
     private Vector<String> _jobTaken = new Vector<>();
-    private Vector<String> _currentJobPont1 = new Vector<>();
-    private Vector<String> _currentJobPont2 = new Vector<>();
-    private Vector<String> _currentJobPont3 = new Vector<>();
-    private Vector<String> _currentJobSol = new Vector<>();
+    Vector<Vector<String>> _currentWorks = new Vector<>();
+    LinkedList<Vector<String>> _finishedWorks = new LinkedList<>();
+
+//    private Vector<String> _currentJobPont1 = new Vector<>();
+//    private Vector<String> _currentJobPont2 = new Vector<>();
+//    private Vector<String> _currentJobPont3 = new Vector<>();
+//    private Vector<String> _currentJobSol = new Vector<>();
+
     private int _jobLocation = 0;
     LinkedList<Boolean> _locationFree = new LinkedList<Boolean>();
+    private int _jobIndexToRemove = 0;
+    private int _workFinishedIndex = 0;
+
 
     public ApplicationGestion()
     {
@@ -54,6 +61,10 @@ public class ApplicationGestion extends JFrame {
         setMinimumSize(new Dimension(700, 370));
         setLocationRelativeTo(this);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        for(int i = 0; i < 4 ; i++)
+            _currentWorks.add(new Vector<String>());
+
     }
 
     private void MenuBar()
@@ -104,8 +115,41 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                TakingOverJob takingOverJob = new TakingOverJob(ApplicationGestion.this,true);
-                takingOverJob.setVisible(true);
+                if(_llWork.isEmpty())
+                {
+                    JOptionPane.showMessageDialog(ApplicationGestion.this, "Aucun travail à prévoir", "Réessayer", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    TakingOverJob takingOverJob = new TakingOverJob(ApplicationGestion.this,true);
+                    takingOverJob.setVisible(true);
+                }
+            }
+        });
+
+        MI_Termine.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                //TODO ADD EXECEPTION IF EMPTY
+                Boolean isEmpty = true;
+
+                for(int i = 0; i < _currentWorks.size(); i++)
+                {
+                    if(!_currentWorks.get(i).isEmpty())
+                        isEmpty = false;
+                }
+
+                if(isEmpty)
+                {
+                    JOptionPane.showMessageDialog(ApplicationGestion.this, "Aucun travail en cours", "Réessayer", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    FinishWork finishWork = new FinishWork(ApplicationGestion.this, true);
+                    finishWork.setVisible(true);
+                }
+
             }
         });
 
@@ -121,7 +165,7 @@ public class ApplicationGestion extends JFrame {
         MI_CentralePieces.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
-            {;
+            {
                 ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(ApplicationGestion.this,true);
                 ApplicationCentrale.setVisible(true);
                 ApplicationCentrale.setTitle("Centrale Achat - Pieces");
@@ -215,24 +259,44 @@ public class ApplicationGestion extends JFrame {
     public void SetJobTaken(Vector<String> jobTaken)
     {
         _jobTaken = jobTaken;
-        //TODO DISPLAY in textflied adequat
+        _llWork.remove(_jobIndexToRemove);
+
         switch(_jobLocation)
         {
             case 0:
                 TF_Pont1.setText(_jobTaken.get(0) + " " + _jobTaken.get(1) + " " +_jobTaken.get(2) + " (" + _jobTaken.get(3) + ")");
-                _currentJobPont1 = _jobTaken;
+
+                if(!_currentWorks.get(0).isEmpty())
+                    _currentWorks.remove(0);
+
+                _currentWorks.add(0, _jobTaken);
                 break;
+
             case 1:
                 TF_Pont2.setText(_jobTaken.get(0) + " " + _jobTaken.get(1) + " " +_jobTaken.get(2) + " (" + _jobTaken.get(3) + ")");
-                _currentJobPont2 = _jobTaken;
+
+                if(!_currentWorks.get(1).isEmpty())
+                    _currentWorks.remove(1);
+
+                _currentWorks.add(1, _jobTaken);
                 break;
+
             case 2 :
                 TF_Pont3.setText(_jobTaken.get(0) + " " + _jobTaken.get(1) + " " +_jobTaken.get(2) + " (" + _jobTaken.get(3) + ")");
-                _currentJobPont3 = _jobTaken;
+
+                if(!_currentWorks.get(2).isEmpty())
+                    _currentWorks.remove(2);
+
+                _currentWorks.add(2, _jobTaken);
                 break;
+
             case 3 :
                 TF_Sol.setText(_jobTaken.get(0) + " " + _jobTaken.get(1) + " " +_jobTaken.get(2) + " (" + _jobTaken.get(3) + ")");
-                _currentJobSol = _jobTaken;
+
+                if(!_currentWorks.get(3).isEmpty())
+                    _currentWorks.remove(3);
+
+                _currentWorks.add(3, _jobTaken);
                 break;
         }
     }
@@ -242,9 +306,44 @@ public class ApplicationGestion extends JFrame {
         _jobLocation = jobLocation;
     }
 
+    public void SetJobIndexToRemove(int jobIndexToRemove)
+    {
+        _jobIndexToRemove = jobIndexToRemove;
+    }
+
     public LinkedList<Vector<String>> GetLlWork()
     {
         return _llWork;
+    }
+
+    public Vector<Vector<String>> GetCurrentWorks()
+    {
+        return _currentWorks;
+    }
+
+    public void SetWorkFinishedIndex(int workFinishedIndex)
+    {
+        _workFinishedIndex = workFinishedIndex;
+
+        _finishedWorks.add(_currentWorks.get(_workFinishedIndex));
+        _currentWorks.get(_workFinishedIndex).clear();
+
+        System.out.println("INDEX TO REMOVE FINSESH WORK " + _workFinishedIndex);
+        switch (_workFinishedIndex)
+        {
+            case 0:
+                TF_Pont1.setText("-- libre --");
+                break;
+            case 1:
+                TF_Pont2.setText("-- libre --");
+                break;
+            case 2:
+                TF_Pont3.setText("-- libre --");
+                break;
+            case 3:
+                TF_Sol.setText("-- libre --");
+                break;
+        }
     }
 
     public LinkedList<Boolean> GetLocationFree()

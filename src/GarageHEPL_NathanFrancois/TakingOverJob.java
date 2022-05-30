@@ -175,6 +175,7 @@ public class TakingOverJob extends JDialog {
         {
             JOptionPane.showMessageDialog(this, "Aucun emplacement disponible", "Réessayer", JOptionPane.ERROR_MESSAGE);
             dispose();
+            return;
         }
 
         if(RB_Sol.isSelected())
@@ -198,6 +199,7 @@ public class TakingOverJob extends JDialog {
             }
         }
 
+        parentApplicationGestion.SetJobIndexToRemove(rowSelected);
         parentApplicationGestion.SetJobLocation(jobLocation);
         parentApplicationGestion.SetJobTaken(jobTaken);
         dispose();

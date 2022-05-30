@@ -23,6 +23,7 @@
           </grid>
         </constraints>
         <properties>
+          <editable value="false"/>
           <text value="-- libre --"/>
           <toolTipText value=""/>
         </properties>
@@ -42,6 +43,7 @@
           </grid>
         </constraints>
         <properties>
+          <editable value="false"/>
           <text value="-- libre --"/>
         </properties>
       </component>
@@ -69,6 +71,7 @@
           </grid>
         </constraints>
         <properties>
+          <editable value="false"/>
           <text value="-- libre --"/>
         </properties>
       </component>
@@ -87,6 +90,7 @@
           </grid>
         </constraints>
         <properties>
+          <editable value="false"/>
           <text value="-- libre --"/>
         </properties>
       </component>
