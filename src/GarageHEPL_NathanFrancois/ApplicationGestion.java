@@ -9,12 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.util.*;
-
-
 import java.awt.*;
 
-
-//extends javax.swing.JFrame
 public class ApplicationGestion extends JFrame {
     private JTextField TF_Pont1;
     private JTextField TF_Pont2;
@@ -35,6 +31,13 @@ public class ApplicationGestion extends JFrame {
 
     private Vector<String> _allInformationsNewWork = new Vector<>();
     LinkedList<Vector<String>> _llWork = new LinkedList<>();
+    private Vector<String> _jobTaken = new Vector<>();
+    private Vector<String> _currentJobPont1 = new Vector<>();
+    private Vector<String> _currentJobPont2 = new Vector<>();
+    private Vector<String> _currentJobPont3 = new Vector<>();
+    private Vector<String> _currentJobSol = new Vector<>();
+    private int _jobLocation = 0;
+    LinkedList<Boolean> _locationFree = new LinkedList<Boolean>();
 
     public ApplicationGestion()
     {
@@ -81,6 +84,7 @@ public class ApplicationGestion extends JFrame {
                 NewWork newWork = new NewWork(ApplicationGestion.this,true);
                 newWork.setVisible(true);
 
+                //// VERIFY IF RECEIVE WORKS
                 Enumeration enu = _allInformationsNewWork.elements();
                 System.out.println("APPLI GESTION :: The enumeration of values are:");
 
@@ -88,6 +92,11 @@ public class ApplicationGestion extends JFrame {
                 while (enu.hasMoreElements()) {
                     System.out.println("ELEMENT : " + enu.nextElement());
                 }
+                //// END
+
+                String concatCarType = _llWork.get(0).get(0);
+                concatCarType = concatCarType + " " + _llWork.get(0).get(1);
+                System.out.println("TEUB ICI " + concatCarType);
             }
         });
 
@@ -95,8 +104,8 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                TakingOverJob PriseEnChargeTravail = new TakingOverJob(ApplicationGestion.this,true);
-                PriseEnChargeTravail.setVisible(true);
+                TakingOverJob takingOverJob = new TakingOverJob(ApplicationGestion.this,true);
+                takingOverJob.setVisible(true);
             }
         });
 
@@ -201,6 +210,87 @@ public class ApplicationGestion extends JFrame {
     {
         _allInformationsNewWork = allInformationsNewWork;
         _llWork.add(_allInformationsNewWork);
+    }
+
+    public void SetJobTaken(Vector<String> jobTaken)
+    {
+        _jobTaken = jobTaken;
+        //TODO DISPLAY in textflied adequat
+        switch(_jobLocation)
+        {
+            case 0:
+                TF_Pont1.setText(_jobTaken.get(0) + " " + _jobTaken.get(1) + " " +_jobTaken.get(2) + " (" + _jobTaken.get(3) + ")");
+                _currentJobPont1 = _jobTaken;
+                break;
+            case 1:
+                TF_Pont2.setText(_jobTaken.get(0) + " " + _jobTaken.get(1) + " " +_jobTaken.get(2) + " (" + _jobTaken.get(3) + ")");
+                _currentJobPont2 = _jobTaken;
+                break;
+            case 2 :
+                TF_Pont3.setText(_jobTaken.get(0) + " " + _jobTaken.get(1) + " " +_jobTaken.get(2) + " (" + _jobTaken.get(3) + ")");
+                _currentJobPont3 = _jobTaken;
+                break;
+            case 3 :
+                TF_Sol.setText(_jobTaken.get(0) + " " + _jobTaken.get(1) + " " +_jobTaken.get(2) + " (" + _jobTaken.get(3) + ")");
+                _currentJobSol = _jobTaken;
+                break;
+        }
+    }
+
+    public void SetJobLocation(int jobLocation)
+    {
+        _jobLocation = jobLocation;
+    }
+
+    public LinkedList<Vector<String>> GetLlWork()
+    {
+        return _llWork;
+    }
+
+    public LinkedList<Boolean> GetLocationFree()
+    {
+        _locationFree.clear();
+
+        System.out.println("TF PONT 1 : " + TF_Pont1.getText());
+
+        if(TF_Pont1.getText().equals("-- libre --"))
+        {
+            _locationFree.add(true);
+        }
+        else
+        {
+            _locationFree.add(false);
+        }
+
+        System.out.println("TF PONT 2 : " + TF_Pont2.getText());
+        if(TF_Pont2.getText().equals("-- libre --"))
+        {
+            _locationFree.add(true);
+        }
+        else
+        {
+            _locationFree.add(false);
+        }
+
+        if(TF_Pont3.getText().equals("-- libre --"))
+        {
+            _locationFree.add(true);
+        }
+        else
+        {
+            _locationFree.add(false);
+        }
+
+        if(TF_Sol.getText().equals("-- libre --"))
+        {
+            _locationFree.add(true);
+        }
+        else
+        {
+            _locationFree.add(false);
+        }
+
+        return _locationFree;
     }
 
     public static void main(String[] args)

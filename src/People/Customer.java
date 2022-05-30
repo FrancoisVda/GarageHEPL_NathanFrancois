@@ -20,7 +20,7 @@ public class Customer extends Person{
     }
 
     public String toString() {
-        return _firstName + " (Client)";
+        return _firstName;
     }
 
 }

@@ -32,7 +32,16 @@ public class NewWork extends JDialog {
         this.parentApplicationGestion = parent;
         Init(modal);
         InsertData();
+    }
 
+    private void Init(boolean modal)
+    {
+        setTitle("Garage HEPL - Nouveau travail pour l'atelier");
+        setContentPane(newWorkPanel);
+        setMinimumSize(new Dimension(550, 500));
+        setModal(modal);
+        setLocationRelativeTo(this);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         // ACTION //
         B_OK.addActionListener(new ActionListener() {
@@ -70,18 +79,6 @@ public class NewWork extends JDialog {
             }
         });
         // ACTION //
-
-
-    }
-
-    private void Init(boolean modal)
-    {
-        setTitle("Garage HEPL - Nouveau travail pour l'atelier");
-        setContentPane(newWorkPanel);
-        setMinimumSize(new Dimension(550, 500));
-        setModal(modal);
-        setLocationRelativeTo(this);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     private void InsertData()

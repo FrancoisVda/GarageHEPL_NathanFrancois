@@ -60,9 +60,11 @@ public class Authentification extends JDialog{
 
         Mechanic Francois = new Mechanic("Francois", "0493545984", "1", "test");
         Mechanic Nathan = new Mechanic("Nathan","0455", "2", "test");
+        Mechanic Test = new Mechanic(" ","1", "2", " ");
 
         listPeople.put(Francois.getFirstName(), Francois);
         listPeople.put(Nathan.getFirstName(), Nathan);
+        listPeople.put(Test.getFirstName(), Test);
     }
 
     private void authentificationUser()
