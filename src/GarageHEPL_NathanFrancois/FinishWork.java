@@ -63,7 +63,7 @@ public class FinishWork extends JDialog {
         }
         else
         {
-            CB_WorkToFinish.addItem("Pont 1 : " + _currentWorks.get(1).get(0) + " " + _currentWorks.get(1).get(1) + " " + _currentWorks.get(1).get(2) + " (" + _currentWorks.get(1).get(3) + ")");
+            CB_WorkToFinish.addItem("Pont 2 : " + _currentWorks.get(1).get(0) + " " + _currentWorks.get(1).get(1) + " " + _currentWorks.get(1).get(2) + " (" + _currentWorks.get(1).get(3) + ")");
         }
 
         if(_currentWorks.get(2).isEmpty())
@@ -72,7 +72,7 @@ public class FinishWork extends JDialog {
         }
         else
         {
-            CB_WorkToFinish.addItem("Pont 1 : " + _currentWorks.get(2).get(0) + " " + _currentWorks.get(2).get(1) + " " + _currentWorks.get(2).get(2) + " (" + _currentWorks.get(2).get(3) + ")");
+            CB_WorkToFinish.addItem("Pont 3 : " + _currentWorks.get(2).get(0) + " " + _currentWorks.get(2).get(1) + " " + _currentWorks.get(2).get(2) + " (" + _currentWorks.get(2).get(3) + ")");
         }
 
         if(_currentWorks.get(3).isEmpty())

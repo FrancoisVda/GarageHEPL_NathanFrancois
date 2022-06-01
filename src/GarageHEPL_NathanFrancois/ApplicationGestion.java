@@ -94,20 +94,6 @@ public class ApplicationGestion extends JFrame {
             {
                 NewWork newWork = new NewWork(ApplicationGestion.this,true);
                 newWork.setVisible(true);
-
-                //// VERIFY IF RECEIVE WORKS
-                Enumeration enu = _allInformationsNewWork.elements();
-                System.out.println("APPLI GESTION :: The enumeration of values are:");
-
-                // Displaying the Enumeration
-                while (enu.hasMoreElements()) {
-                    System.out.println("ELEMENT : " + enu.nextElement());
-                }
-                //// END
-
-                String concatCarType = _llWork.get(0).get(0);
-                concatCarType = concatCarType + " " + _llWork.get(0).get(1);
-                System.out.println("TEUB ICI " + concatCarType);
             }
         });
 
@@ -131,7 +117,6 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                //TODO ADD EXECEPTION IF EMPTY
                 Boolean isEmpty = true;
 
                 for(int i = 0; i < _currentWorks.size(); i++)
@@ -261,42 +246,32 @@ public class ApplicationGestion extends JFrame {
         _jobTaken = jobTaken;
         _llWork.remove(_jobIndexToRemove);
 
+        System.out.println("SetJobTaken :: _workFinishedIndex " + _workFinishedIndex);
+
         switch(_jobLocation)
         {
             case 0:
                 TF_Pont1.setText(_jobTaken.get(0) + " " + _jobTaken.get(1) + " " +_jobTaken.get(2) + " (" + _jobTaken.get(3) + ")");
 
-                if(!_currentWorks.get(0).isEmpty())
-                    _currentWorks.remove(0);
-
-                _currentWorks.add(0, _jobTaken);
+                _currentWorks.setElementAt(_jobTaken, 0);
                 break;
 
             case 1:
                 TF_Pont2.setText(_jobTaken.get(0) + " " + _jobTaken.get(1) + " " +_jobTaken.get(2) + " (" + _jobTaken.get(3) + ")");
 
-                if(!_currentWorks.get(1).isEmpty())
-                    _currentWorks.remove(1);
-
-                _currentWorks.add(1, _jobTaken);
+                _currentWorks.setElementAt(_jobTaken, 1);
                 break;
 
             case 2 :
                 TF_Pont3.setText(_jobTaken.get(0) + " " + _jobTaken.get(1) + " " +_jobTaken.get(2) + " (" + _jobTaken.get(3) + ")");
 
-                if(!_currentWorks.get(2).isEmpty())
-                    _currentWorks.remove(2);
-
-                _currentWorks.add(2, _jobTaken);
+                _currentWorks.setElementAt(_jobTaken, 2);
                 break;
 
             case 3 :
                 TF_Sol.setText(_jobTaken.get(0) + " " + _jobTaken.get(1) + " " +_jobTaken.get(2) + " (" + _jobTaken.get(3) + ")");
 
-                if(!_currentWorks.get(3).isEmpty())
-                    _currentWorks.remove(3);
-
-                _currentWorks.add(3, _jobTaken);
+                _currentWorks.setElementAt(_jobTaken, 3);
                 break;
         }
     }
@@ -304,11 +279,13 @@ public class ApplicationGestion extends JFrame {
     public void SetJobLocation(int jobLocation)
     {
         _jobLocation = jobLocation;
+        System.out.println("SetJobLocation :: jobLocation " + _jobLocation);
     }
 
     public void SetJobIndexToRemove(int jobIndexToRemove)
     {
         _jobIndexToRemove = jobIndexToRemove;
+        System.out.println("SetJobIndexToRemove :: jobIndexToRemove " + _jobIndexToRemove);
     }
 
     public LinkedList<Vector<String>> GetLlWork()
@@ -318,6 +295,13 @@ public class ApplicationGestion extends JFrame {
 
     public Vector<Vector<String>> GetCurrentWorks()
     {
+        Enumeration enu = _currentWorks.elements();
+        System.out.println("GetCurrentWorks::AppliGestion::  Before sending :");
+
+        // Displaying the Enumeration
+        while (enu.hasMoreElements()) {
+            System.out.println("ELEMENT : " + enu.nextElement());
+        }
         return _currentWorks;
     }
 
@@ -328,7 +312,7 @@ public class ApplicationGestion extends JFrame {
         _finishedWorks.add(_currentWorks.get(_workFinishedIndex));
         _currentWorks.get(_workFinishedIndex).clear();
 
-        System.out.println("INDEX TO REMOVE FINSESH WORK " + _workFinishedIndex);
+        System.out.println("INDEX TO REMOVE FINISHED WORK " + _workFinishedIndex);
         switch (_workFinishedIndex)
         {
             case 0:

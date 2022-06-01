@@ -4,7 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Hashtable;
+import java.util.Properties;
+
 import People.*;
 
 public class Authentification extends JDialog{
@@ -22,12 +27,7 @@ public class Authentification extends JDialog{
     {
         super(parent, modal);
         Init(parent, modal);
-
         InsertData();
-
-        // ACTION //
-
-        // ACTION //
     }
 
     private void Init(JFrame parent, boolean modal)
@@ -42,7 +42,7 @@ public class Authentification extends JDialog{
         OKButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                authentificationUser();
+                AuthentificationUser();
             }
         });
 
@@ -67,7 +67,9 @@ public class Authentification extends JDialog{
         listPeople.put(Test.getFirstName(), Test);
     }
 
-    private void authentificationUser()
+
+
+    private void AuthentificationUser()
     {
         String user = userTextField.getText();
         String password = String.valueOf(PF_Password.getPassword());
