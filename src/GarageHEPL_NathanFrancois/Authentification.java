@@ -13,40 +13,60 @@ import java.util.Properties;
 import People.*;
 
 public class Authentification extends JDialog{
-    private JPanel authentificationPanel;
-    private JTextField userTextField;
-    private JRadioButton membreDuPersonnelRadioButton;
-    private JRadioButton exterieurHabiliteRadioButton;
-    private JButton OKButton;
-    private JButton annulerButton;
+    private JPanel JP_Authentification;
+    private JTextField TF_User;
+    private JRadioButton RB_MembreDuPersonnel;
+    private JRadioButton RB_ExterieurHabilite;
+    private JButton B_OK;
+    private JButton B_Annuler;
     private JPasswordField PF_Password;
 
+    private Boolean _jobChoiceAuthentification;
+
+    public ApplicationGestion parentApplicationGestion;
     Hashtable listPeople;
 
-    public Authentification(JFrame parent, boolean modal)
+    public Authentification(ApplicationGestion parent, boolean modal)
     {
         super(parent, modal);
+        this.parentApplicationGestion = parent;
         Init(parent, modal);
         InsertData();
+
+        // ACTION //
+
+        // ACTION //
     }
 
     private void Init(JFrame parent, boolean modal)
     {
         setTitle("Garage HEPL - Authentification d'un utilisateur");
-        setContentPane(authentificationPanel);
+        setContentPane(JP_Authentification);
         setMinimumSize(new Dimension(450, 474));
         setModal(modal);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        OKButton.addActionListener(new ActionListener() {
+        RB_MembreDuPersonnel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AuthentificationUser();
+                RB_ExterieurHabilite.setSelected(false);
+            }
+        });
+        RB_ExterieurHabilite.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RB_MembreDuPersonnel.setSelected(false);
+            }
+        });
+        B_OK.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                authentificationUser();
             }
         });
 
-        annulerButton.addActionListener(new ActionListener() {
+        B_Annuler.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
@@ -58,54 +78,69 @@ public class Authentification extends JDialog{
     {
         listPeople = new Hashtable();
 
-        Mechanic Francois = new Mechanic("Francois", "0493545984", "1", "test");
-        Mechanic Nathan = new Mechanic("Nathan","0455", "2", "test");
-        Mechanic Test = new Mechanic(" ","1", "2", " ");
+        Mechanic Francois = new Mechanic("VDA", "Francois", "NullePart", "0493545984", "1", "test", "Boulon");
+        Employee Nathan = new Employee("Luc","Nathan", "JSP", "0486164301", "2", "test");
+        ExternalTechnician Feri = new ExternalTechnician("Varga","Feri", "TrouDuCul", "0493164934");
 
         listPeople.put(Francois.getFirstName(), Francois);
         listPeople.put(Nathan.getFirstName(), Nathan);
-        listPeople.put(Test.getFirstName(), Test);
+        listPeople.put(Feri.getFirstName(), Feri);
     }
 
-
-
-    private void AuthentificationUser()
+    private void authentificationUser()
     {
-        String user = userTextField.getText();
+        String user = TF_User.getText();
         String password = String.valueOf(PF_Password.getPassword());
-
-        if(user.isEmpty() || password.isEmpty())
-        {
-            JOptionPane.showMessageDialog(this, "Information manquante", "Réessayer", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        //listPeople.contains(user);
 
         if(listPeople.containsKey(user))
         {
             System.out.println("L'utilisateur existe !");
 
-            if(password.equals(((GarageStaff)listPeople.get(user)).getPassword()))
+            if(listPeople.get(user).getClass() == ExternalTechnician.class || ((GarageStaff)listPeople.get(user)).isValid(password))
             {
-                System.out.println("Tu es connecté");
-
-                this.dispose();
-                ApplicationGestion applicationGestion = new ApplicationGestion();
-                applicationGestion.setVisible(true);
-
-            // TODO verify if member of staff or extern
+                if(RB_MembreDuPersonnel.isSelected() && listPeople.get(user).getClass() == Mechanic.class)
+                {
+                    System.out.println("Mechanicien");
+                    parentApplicationGestion.SetJobChoiceAuthentification(true);
+                    this.dispose();
+                    ApplicationGestion applicationGestion = new ApplicationGestion();
+                    applicationGestion.setVisible(true);
+                }
+                else if(RB_MembreDuPersonnel.isSelected() && listPeople.get(user).getClass() == Employee.class)
+                {
+                    System.out.println("Employe");
+                    _jobChoiceAuthentification = false;
+                    parentApplicationGestion.SetJobChoiceAuthentification(_jobChoiceAuthentification);
+                    this.dispose();
+                    ApplicationGestion applicationGestion = new ApplicationGestion();
+                    applicationGestion.setVisible(true);
+                }
+                else if(RB_ExterieurHabilite.isSelected() && listPeople.get(user).getClass() == ExternalTechnician.class)
+                {
+                    System.out.println("Exterieur Habilite");
+                    parentApplicationGestion.SetJobChoiceAuthentification(false);
+                    this.dispose();
+                    ApplicationGestion applicationGestion = new ApplicationGestion();
+                    applicationGestion.setVisible(true);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this, "Poste Incorrecte", "Réessayer", JOptionPane.ERROR_MESSAGE);
+                }
             }
             else
             {
                 JOptionPane.showMessageDialog(this, "Mot de passe érroné !", "Réessayer", JOptionPane.ERROR_MESSAGE);
             }
-
         }
-        else if (!listPeople.containsKey(user))
+        else if (user.isEmpty() || password.isEmpty())
         {
+            JOptionPane.showMessageDialog(this, "Information manquante", "Réessayer", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+
             JOptionPane.showMessageDialog(this, "L'utilisateur n'existe pas !", "Réessayer", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 }

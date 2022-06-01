@@ -2,7 +2,7 @@ package People;
 
 public class Employee extends GarageStaff {
 
-    public Employee(String lastName, String FirstName, String address, String phoneNumber, String id, String password, String speciality)
+    public Employee(String lastName, String FirstName, String address, String phoneNumber, String id, String password)
     {
         super(lastName, FirstName, address, phoneNumber, id, password);
     }

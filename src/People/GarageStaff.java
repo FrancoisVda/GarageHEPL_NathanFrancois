@@ -31,8 +31,9 @@ public abstract class GarageStaff extends Person implements Identifiable, AValid
     @Override
     public Boolean isValid(String element)
     {
-        if(_password == element)
+        if(_password.equals(element)) {
             return true;
+        }
         return false;
     }
 

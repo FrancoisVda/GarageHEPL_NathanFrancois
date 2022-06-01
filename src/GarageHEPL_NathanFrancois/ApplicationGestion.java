@@ -30,6 +30,10 @@ public class ApplicationGestion extends JFrame {
     private JMenuBar MenuBar;
 
     private Vector<String> _allInformationsNewWork = new Vector<>();
+
+    private Boolean _jobChoiceAuthentification;
+
+    private Boolean _authenticateDone = false;
     LinkedList<Vector<String>> _llWork = new LinkedList<>();
     private Vector<String> _jobTaken = new Vector<>();
     Vector<Vector<String>> _currentWorks = new Vector<>();
@@ -239,6 +243,10 @@ public class ApplicationGestion extends JFrame {
     {
         _allInformationsNewWork = allInformationsNewWork;
         _llWork.add(_allInformationsNewWork);
+    }
+    public void SetJobChoiceAuthentification(Boolean jobChoiceAuthentification) {
+        _jobChoiceAuthentification = jobChoiceAuthentification;
+        _authenticateDone = true;
     }
 
     public void SetJobTaken(Vector<String> jobTaken)
