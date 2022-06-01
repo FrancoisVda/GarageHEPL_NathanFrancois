@@ -2,9 +2,9 @@ package People;
 
 public class Employee extends GarageStaff {
 
-    public Employee(String firstName, String phoneNumber, String id, String password)
+    public Employee(String lastName, String FirstName, String address, String phoneNumber, String id, String password, String speciality)
     {
-        super(firstName, phoneNumber, id, password);
+        super(lastName, FirstName, address, phoneNumber, id, password);
     }
 
     @Override

@@ -2,9 +2,9 @@ package People;
 
 public class ExternalTechnician extends Person{
 
-    public ExternalTechnician(String firstName, String phoneNumber, String id, String password)
+    public ExternalTechnician(String lastName, String firstName, String address, String phoneNumber)
     {
-        super(firstName, phoneNumber, id, password);
+        super(lastName, firstName, address, phoneNumber);
     }
 
 }

@@ -8,22 +8,13 @@ public abstract class GarageStaff extends Person implements Identifiable, AValid
     String _id;
     String _password;
 
-    public GarageStaff(String firstName, String phoneNumber, String id, String password)
+    public GarageStaff(String lastName, String FirstName, String address, String phoneNumber, String id, String password)
     {
-        super(firstName, phoneNumber);
+        super(lastName, FirstName, address, phoneNumber);
         _id = id;
         _password = password;
     }
 
-    public String getPassword()
-    {
-        return _password;
-    }
-
-    public void setPassword(String password)
-    {
-        _password = password;
-    }
 
     @Override
     public String getId()
@@ -38,16 +29,17 @@ public abstract class GarageStaff extends Person implements Identifiable, AValid
     }
 
     @Override
-    public Boolean isValid()
+    public Boolean isValid(String element)
     {
-        return true; // TODO search what we need to know if valid
+        if(_password == element)
+            return true;
+        return false;
     }
 
     @Override
     public Boolean validate()
     {
         return true; // TODO search what we need to validate
-        // HASTABLE statique
     }
 
     public abstract String toString();
