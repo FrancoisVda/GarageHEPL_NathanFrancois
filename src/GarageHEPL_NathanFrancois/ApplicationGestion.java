@@ -17,7 +17,6 @@ public class ApplicationGestion extends JFrame {
     private JTextField TF_Pont3;
     private JTextField TF_Sol;
     private JTextField TF_Divers;
-    private JTextPane TP_Image;
     private JTextField TF_BureauClient;
     private JTextField TF_BureauCompta;
     private JCheckBox CB_Patron;
@@ -28,6 +27,8 @@ public class ApplicationGestion extends JFrame {
     private JPanel JP_ApplicationGestion;
     private JTextField TF_Date;
     private JMenuBar MenuBar;
+
+    private JLabel L_Image;
 
     private Vector<String> _allInformationsNewWork = new Vector<>();
 
@@ -49,9 +50,7 @@ public class ApplicationGestion extends JFrame {
     private int _jobIndexToRemove = 0;
     private int _workFinishedIndex = 0;
 
-
-    public ApplicationGestion()
-    {
+    public ApplicationGestion() {
         Init();
         MenuBar();
         TimeDisplay();
@@ -68,12 +67,10 @@ public class ApplicationGestion extends JFrame {
 
         for(int i = 0; i < 4 ; i++)
             _currentWorks.add(new Vector<String>());
-
     }
 
     private void MenuBar()
     {
-
         JMenu M_Atelier = new JMenu("Atelier");
         JMenu M_Materiel = new JMenu("Materiel");
         JMenu M_Clients = new JMenu("Clients");
