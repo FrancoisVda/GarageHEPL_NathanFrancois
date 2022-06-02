@@ -7,8 +7,11 @@ import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Properties;
+import java.util.StringTokenizer;
 
 import People.*;
 
@@ -32,10 +35,6 @@ public class Authentification extends JDialog{
         this.parentApplicationGestion = parent;
         Init(parent, modal);
         InsertData();
-
-        // ACTION //
-
-        // ACTION //
     }
 
     private void Init(JFrame parent, boolean modal)
@@ -78,13 +77,43 @@ public class Authentification extends JDialog{
     {
         listPeople = new Hashtable();
 
-        Mechanic Francois = new Mechanic("VDA", "Francois", "NullePart", "0493545984", "1", "test", "Boulon");
-        Employee Nathan = new Employee("Luc","Nathan", "JSP", "0486164301", "2", "test");
-        ExternalTechnician Feri = new ExternalTechnician("Varga","Feri", "TrouDuCul", "0493164934");
+        try (InputStream input = new FileInputStream("src\\GarageHEPL_NathanFrancois\\users.properties")) {
 
-        listPeople.put(Francois.getFirstName(), Francois);
-        listPeople.put(Nathan.getFirstName(), Nathan);
-        listPeople.put(Feri.getFirstName(), Feri);
+            Properties prop = new Properties();
+            prop.load(input);
+
+            Iterator it = prop.keySet().iterator();
+
+            int i =0;
+            while (it.hasNext()) {
+                StringTokenizer st = new StringTokenizer(prop.getProperty("users" + i));
+
+                String userType = st.nextToken(",");
+
+                switch (userType)
+                {
+                    case "Mechanic":
+                        Mechanic newMechanic = new Mechanic(st.nextToken(","), st.nextToken(","), st.nextToken(","), st.nextToken(","), st.nextToken(","), st.nextToken(","), st.nextToken(","));
+                        listPeople.put(newMechanic.getFirstName(), newMechanic);
+                        System.out.println("New mechanic : " + newMechanic.getFirstName());
+                        break;
+                    case "Employee":
+                        Employee newEmployee = new Employee(st.nextToken(","),st.nextToken(","), st.nextToken(","), st.nextToken(","), st.nextToken(","), st.nextToken(","));
+                        listPeople.put(newEmployee.getFirstName(), newEmployee);
+                        System.out.println("New Employee : " + newEmployee.getFirstName());
+                        break;
+                    case "ExternalTechnician":
+                        ExternalTechnician newExternalTechnician = new ExternalTechnician(st.nextToken(","),st.nextToken(","), st.nextToken(","), st.nextToken(","));
+                        listPeople.put(newExternalTechnician.getFirstName(), newExternalTechnician);
+                        System.out.println("New Employee : " + newExternalTechnician.getFirstName());
+                        break;
+                }
+                i++;
+                it.next();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void authentificationUser()
