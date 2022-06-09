@@ -43,7 +43,6 @@ public class ApplicationGestion extends JFrame {
     private int _workFinishedIndex = 0;
 
 
-
     public ApplicationGestion() {
         Init();
         MenuBar();
@@ -61,44 +60,8 @@ public class ApplicationGestion extends JFrame {
         for(int i = 0; i < 4 ; i++)
             _currentWorks.add(new Vector<String>());
 
-        //TODO Deserialize data to have ALL NEW WORK (LLWORK)
-        try
-        {
-            System.out.println("Lecture du fichier");
-            FileInputStream fileInputStream = new FileInputStream("src\\GarageHEPL_NathanFrancois\\data_allWorks.txt");
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            Vector<String> newWork = new Vector<>();
-            String test = "";
-
-            while (fileInputStream.available() > 0) {
-                    newWork = (Vector<String>) objectInputStream.readObject();
-
-                    Enumeration enu = newWork.elements();
-                    System.out.println("DESERIALIZE::AppliGestion:: ");
-
-                    // Displaying the Enumeration
-                    while (enu.hasMoreElements()) {
-                        System.out.println("ELEMENT : " + enu.nextElement());
-                    }
-                    //_llWork = newWork;
-                    _llWork.add(newWork);
-            }
-            fileInputStream.close();
-            objectInputStream.close();
-        }
-        catch (FileNotFoundException e)
-        {
-            System.err.println("Erreur (INIT - APP GESTION) ! Fichier non trouvé [" + e + "]");
-        }
-        catch (IOException e)
-        {
-            System.err.println("Erreur ! ? [" + e + "]");
-        }
-        catch (ClassNotFoundException e)
-        {
-            System.err.println("Erreur ! Classe non trouvée [" + e + "]");
-        }
-
+        DeserializeLlWorks();
+        DeserializeCurrentWorks();
     }
 
     private void MenuBar()
@@ -337,6 +300,116 @@ public class ApplicationGestion extends JFrame {
         }
     }
 
+    public void SerializeCurrentWorks()
+    {
+        try
+        {
+            FileOutputStream fileOutputStream = new FileOutputStream("src\\GarageHEPL_NathanFrancois\\data_currentWorks.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            System.out.println("SerializeCurrentWorks :: NORMALY SERIALIZE DATA");
+
+            for(int i =0; i < _currentWorks.size() ; i++)
+            {
+                System.out.println("SERIALAZING DATA Nb : " + i);
+                objectOutputStream.writeObject(_currentWorks.get(i));
+                objectOutputStream.flush();
+            }
+
+            objectOutputStream.close();
+            fileOutputStream.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            System.err.println("Erreur ! Fichier non trouvé [" + e + "]");
+        }
+        catch (IOException e)
+        {
+            System.err.println("Erreur ! ? [" + e + "]");
+        }
+    }
+
+    public void DeserializeLlWorks()
+    {
+        try
+        {
+            System.out.println("Lecture du fichier");
+            FileInputStream fileInputStream = new FileInputStream("src\\GarageHEPL_NathanFrancois\\data_allWorks.txt");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            Vector<String> newWork = new Vector<>();
+
+            while (fileInputStream.available() > 0) {
+                newWork = (Vector<String>) objectInputStream.readObject();
+                _llWork.add(newWork);
+            }
+            fileInputStream.close();
+            objectInputStream.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            System.err.println("Erreur (INIT - APP GESTION) ! Fichier non trouvé [" + e + "]");
+        }
+        catch (IOException e)
+        {
+            System.err.println("Erreur ! ? [" + e + "]");
+        }
+        catch (ClassNotFoundException e)
+        {
+            System.err.println("Erreur ! Classe non trouvée [" + e + "]");
+        }
+    }
+
+    public void DeserializeCurrentWorks()
+    {
+        try
+        {
+            System.out.println("Lecture du fichier");
+            FileInputStream fileInputStream = new FileInputStream("src\\GarageHEPL_NathanFrancois\\data_currentWorks.txt");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            Vector<String> newCurrentWork = new Vector<>();
+
+            int i = 0;
+            while (fileInputStream.available() > 0) {
+                newCurrentWork = (Vector<String>) objectInputStream.readObject();
+                _currentWorks.setElementAt(newCurrentWork, i);
+                i++;
+            }
+            fileInputStream.close();
+            objectInputStream.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            System.err.println("Erreur (INIT - APP GESTION) ! Fichier non trouvé [" + e + "]");
+        }
+        catch (IOException e)
+        {
+            System.err.println("Erreur ! ? [" + e + "]");
+        }
+        catch (ClassNotFoundException e)
+        {
+            System.err.println("Erreur ! Classe non trouvée [" + e + "]");
+        }
+
+        if(!_currentWorks.get(0).isEmpty())
+        {
+            TF_Pont1.setText(_currentWorks.get(0).get(0) + " " + _currentWorks.get(0).get(1) + " " + _currentWorks.get(0).get(2) + " (" + _currentWorks.get(0).get(3) + ")");
+        }
+
+        if(!_currentWorks.get(1).isEmpty())
+        {
+            TF_Pont2.setText(_currentWorks.get(1).get(0) + " " + _currentWorks.get(1).get(1) + " " + _currentWorks.get(1).get(2) + " (" + _currentWorks.get(1).get(3) + ")");
+        }
+
+        if(!_currentWorks.get(2).isEmpty())
+        {
+            TF_Pont3.setText(_currentWorks.get(2).get(0) + " " + _currentWorks.get(2).get(1) + " " + _currentWorks.get(2).get(2) + " (" + _currentWorks.get(2).get(3) + ")");
+        }
+
+        if(!_currentWorks.get(3).isEmpty())
+        {
+            TF_Sol.setText(_currentWorks.get(3).get(0) + " " + _currentWorks.get(3).get(1) + " " + _currentWorks.get(3).get(2) + " (" + _currentWorks.get(3).get(3) + ")");
+        }
+    }
+
     public void SetJobTaken(Vector<String> jobTaken)
     {
         _jobTaken = jobTaken;
@@ -371,6 +444,8 @@ public class ApplicationGestion extends JFrame {
                 _currentWorks.setElementAt(_jobTaken, 3);
                 break;
         }
+        SerializeCurrentWorks();
+
     }
 
     public void SetJobLocation(int jobLocation)
@@ -408,6 +483,7 @@ public class ApplicationGestion extends JFrame {
 
         _finishedWorks.add(_currentWorks.get(_workFinishedIndex));
         _currentWorks.get(_workFinishedIndex).clear();
+        SerializeCurrentWorks();
 
         System.out.println("INDEX TO REMOVE FINISHED WORK " + _workFinishedIndex);
         switch (_workFinishedIndex)
