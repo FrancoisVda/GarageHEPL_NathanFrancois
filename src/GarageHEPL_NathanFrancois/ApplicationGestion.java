@@ -56,7 +56,6 @@ public class ApplicationGestion extends JFrame {
 
     private void Init()
     {
-        //setTitle("Garage HEPL - Authentification d'un utilisateur");
         setContentPane(JP_ApplicationGestion);
         setMinimumSize(new Dimension(700, 370));
         setLocationRelativeTo(this);
@@ -193,6 +192,24 @@ public class ApplicationGestion extends JFrame {
                 {
                     JOptionPane.showMessageDialog(ApplicationGestion.this, "Habilitation Incorrecte", "Accès Refusé", JOptionPane.ERROR_MESSAGE);
                 }
+            }
+        });
+
+        MI_Infos.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                InfoSysteme InfoSysteme = new InfoSysteme(ApplicationGestion.this, true);
+                InfoSysteme.setVisible(true);
+            }
+        });
+
+        MI_Debuter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ForStart ForStart = new ForStart(ApplicationGestion.this, true);
+                ForStart.setVisible(true);
             }
         });
 

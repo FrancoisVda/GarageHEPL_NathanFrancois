@@ -2,6 +2,8 @@ package GarageHEPL_NathanFrancois;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class About extends JDialog {
     private JRadioButton RB_Aime;
@@ -10,19 +12,8 @@ public class About extends JDialog {
     private JButton B_OK;
     private JPanel JP_About;
 
-
-    private boolean _visibility = false;
-
-    public void setVisibility(boolean visible) {
-        _visibility = visible;
-    }
-
-    public boolean getVisibility() {
-        return _visibility;
-    }
-
-    public About(JFrame parent, boolean modal) {
-        // ---------- //
+    public About(JFrame parent, boolean modal)
+    {
         super(parent, modal);
         setTitle("A Propos");
         setContentPane(JP_About);
@@ -30,6 +21,13 @@ public class About extends JDialog {
         setModal(modal);
         setLocationRelativeTo(this);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        // ---------- //
+        B_OK.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                dispose();
+            }
+        });
     }
 }
