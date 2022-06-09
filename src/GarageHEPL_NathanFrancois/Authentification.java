@@ -154,6 +154,16 @@ public class Authentification extends JDialog{
                 else
                 {
                     JOptionPane.showMessageDialog(this, "Poste Incorrecte", "Réessayer", JOptionPane.ERROR_MESSAGE);
+                    if(RB_MembreDuPersonnel.isSelected())
+                    {
+                        RB_MembreDuPersonnel.setSelected(false);
+                        RB_ExterieurHabilite.setSelected(true);
+                    }
+                    else if (RB_ExterieurHabilite.isSelected())
+                    {
+                        RB_ExterieurHabilite.setSelected(false);
+                        RB_MembreDuPersonnel.setSelected(true);
+                    }
                 }
             }
             else
