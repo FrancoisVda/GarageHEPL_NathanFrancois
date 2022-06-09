@@ -129,28 +129,27 @@ public class Authentification extends JDialog{
             {
                 if(RB_MembreDuPersonnel.isSelected() && listPeople.get(user).getClass() == Mechanic.class)
                 {
-                    System.out.println("Mechanicien");
-                    parentApplicationGestion.SetJobChoiceAuthentification(true);
+                    System.out.println("Méchanicien");
                     this.dispose();
                     ApplicationGestion applicationGestion = new ApplicationGestion();
                     applicationGestion.setVisible(true);
+                    applicationGestion.setTitle("Garage HEPL - Méchanicien");
                 }
                 else if(RB_MembreDuPersonnel.isSelected() && listPeople.get(user).getClass() == Employee.class)
                 {
-                    System.out.println("Employe");
-                    _jobChoiceAuthentification = false;
-                    parentApplicationGestion.SetJobChoiceAuthentification(_jobChoiceAuthentification);
+                    System.out.println("Employé");
                     this.dispose();
                     ApplicationGestion applicationGestion = new ApplicationGestion();
                     applicationGestion.setVisible(true);
+                    applicationGestion.setTitle("Garage HEPL - Employé");
                 }
                 else if(RB_ExterieurHabilite.isSelected() && listPeople.get(user).getClass() == ExternalTechnician.class)
                 {
-                    System.out.println("Exterieur Habilite");
-                    parentApplicationGestion.SetJobChoiceAuthentification(false);
+                    System.out.println("Extérieur Habilité");
                     this.dispose();
                     ApplicationGestion applicationGestion = new ApplicationGestion();
                     applicationGestion.setVisible(true);
+                    applicationGestion.setTitle("Garage HEPL - Extérieur Habilité");
                 }
                 else
                 {
