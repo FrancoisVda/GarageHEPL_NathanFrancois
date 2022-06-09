@@ -5,12 +5,12 @@ import Vehicle.Car;
 import Vehicle.CarType;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.text.DateFormat;
 import java.util.*;
-import java.awt.*;
 
 public class ApplicationGestion extends JFrame {
     private JTextField TF_Pont1;
@@ -32,10 +32,6 @@ public class ApplicationGestion extends JFrame {
     private JLabel L_Image;
 
     private Vector<String> _allInformationsNewWork = new Vector<>();
-
-    private Boolean _jobChoiceAuthentification;
-
-    private Boolean _authenticateDone = false;
     LinkedList<Vector<String>> _llWork = new LinkedList<>();
     private Vector<String> _jobTaken = new Vector<>();
     Vector<Vector<String>> _currentWorks = new Vector<>();
@@ -57,7 +53,7 @@ public class ApplicationGestion extends JFrame {
 
     private void Init()
     {
-        setTitle("Garage HEPL - Authentification d'un utilisateur");
+        //setTitle("Garage HEPL - Authentification d'un utilisateur");
         setContentPane(JP_ApplicationGestion);
         setMinimumSize(new Dimension(700, 370));
         setLocationRelativeTo(this);
@@ -112,7 +108,7 @@ public class ApplicationGestion extends JFrame {
         JMenu M_Materiel = new JMenu("Materiel");
         JMenu M_Clients = new JMenu("Clients");
         JMenu M_Factures = new JMenu("Factures");
-        JMenu M_Paramètres = new JMenu("Paramètres");
+        JMenu M_Parametres = new JMenu("Paramètres");
         JMenu M_Aide = new JMenu("Aide");
 
         JMenuItem MI_Prevoir = new JMenuItem("Prévoir");
@@ -189,10 +185,16 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(ApplicationGestion.this,true);
-                ApplicationCentrale.setVisible(true);
-                ApplicationCentrale.setTitle("Centrale Achat - Pieces");
-                //Choix = "Pieces";
+                if(ApplicationGestion.this.getTitle() == "Garage HEPL - Méchanicien")
+                {
+                    ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(ApplicationGestion.this, true);
+                    ApplicationCentrale.setVisible(true);
+                    ApplicationCentrale.setTitle("Centrale Achat - Pieces");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(ApplicationGestion.this, "Habilitation Incorrecte", "Accès Refusé", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -200,11 +202,16 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {;
-                ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(ApplicationGestion.this,true);
-                ApplicationCentrale.setVisible(true);
-                ApplicationCentrale.setTitle("Centrale Achat - Pneus");
-                //Choix = "Pneus";
-
+                if(ApplicationGestion.this.getTitle() == "Garage HEPL - Méchanicien")
+                {
+                    ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(ApplicationGestion.this, true);
+                    ApplicationCentrale.setVisible(true);
+                    ApplicationCentrale.setTitle("Centrale Achat - Pneus");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(ApplicationGestion.this, "Habilitation Incorrecte", "Accès Refusé", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -212,11 +219,16 @@ public class ApplicationGestion extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {;
-                ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(ApplicationGestion.this,true);
-                ApplicationCentrale.setVisible(true);
-                ApplicationCentrale.setTitle("Centrale Achat - Lubrifiants");
-                //Choix = "Lubrifiants";
-
+                if(ApplicationGestion.this.getTitle() == "Garage HEPL - Méchanicien")
+                {
+                    ApplicationCentrale ApplicationCentrale = new ApplicationCentrale(ApplicationGestion.this, true);
+                    ApplicationCentrale.setVisible(true);
+                    ApplicationCentrale.setTitle("Centrale Achat - Lubrifiants");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(ApplicationGestion.this, "Habilitation Incorrecte", "Accès Refusé", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -230,7 +242,7 @@ public class ApplicationGestion extends JFrame {
         M_Materiel.add(MI_CentralePneus);
         M_Materiel.add(MI_CentraleLubrifiants);
 
-        M_Paramètres.add(MI_Infos);
+        M_Parametres.add(MI_Infos);
 
         M_Aide.add(MI_Debuter);
         M_Aide.add(MI_APropos);
@@ -240,7 +252,7 @@ public class ApplicationGestion extends JFrame {
         MenuBar.add(M_Clients);
         MenuBar.add(M_Factures);
         MenuBar.add(Box.createHorizontalGlue());
-        MenuBar.add(M_Paramètres);
+        MenuBar.add(M_Parametres);
         MenuBar.add(M_Aide);
     }
 
@@ -278,10 +290,6 @@ public class ApplicationGestion extends JFrame {
         _allInformationsNewWork = allInformationsNewWork;
         _llWork.add(_allInformationsNewWork);
         SerializeLlWork();
-    }
-    public void SetJobChoiceAuthentification(Boolean jobChoiceAuthentification) {
-        _jobChoiceAuthentification = jobChoiceAuthentification;
-        _authenticateDone = true;
     }
 
     public void SerializeLlWork()
