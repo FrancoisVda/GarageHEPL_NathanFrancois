@@ -7,6 +7,7 @@ import Vehicle.CarType;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.text.DateFormat;
 import java.util.*;
 import java.awt.*;
@@ -40,15 +41,12 @@ public class ApplicationGestion extends JFrame {
     Vector<Vector<String>> _currentWorks = new Vector<>();
     LinkedList<Vector<String>> _finishedWorks = new LinkedList<>();
 
-//    private Vector<String> _currentJobPont1 = new Vector<>();
-//    private Vector<String> _currentJobPont2 = new Vector<>();
-//    private Vector<String> _currentJobPont3 = new Vector<>();
-//    private Vector<String> _currentJobSol = new Vector<>();
-
     private int _jobLocation = 0;
     LinkedList<Boolean> _locationFree = new LinkedList<Boolean>();
     private int _jobIndexToRemove = 0;
     private int _workFinishedIndex = 0;
+
+
 
     public ApplicationGestion() {
         Init();
@@ -67,6 +65,45 @@ public class ApplicationGestion extends JFrame {
 
         for(int i = 0; i < 4 ; i++)
             _currentWorks.add(new Vector<String>());
+
+        //TODO Deserialize data to have ALL NEW WORK (LLWORK)
+        try
+        {
+            System.out.println("Lecture du fichier");
+            FileInputStream fileInputStream = new FileInputStream("src\\GarageHEPL_NathanFrancois\\data_allWorks.txt");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            Vector<String> newWork = new Vector<>();
+            String test = "";
+
+            while (fileInputStream.available() > 0) {
+                    newWork = (Vector<String>) objectInputStream.readObject();
+
+                    Enumeration enu = newWork.elements();
+                    System.out.println("DESERIALIZE::AppliGestion:: ");
+
+                    // Displaying the Enumeration
+                    while (enu.hasMoreElements()) {
+                        System.out.println("ELEMENT : " + enu.nextElement());
+                    }
+                    //_llWork = newWork;
+                    _llWork.add(newWork);
+            }
+            fileInputStream.close();
+            objectInputStream.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            System.err.println("Erreur (INIT - APP GESTION) ! Fichier non trouvé [" + e + "]");
+        }
+        catch (IOException e)
+        {
+            System.err.println("Erreur ! ? [" + e + "]");
+        }
+        catch (ClassNotFoundException e)
+        {
+            System.err.println("Erreur ! Classe non trouvée [" + e + "]");
+        }
+
     }
 
     private void MenuBar()
@@ -240,16 +277,46 @@ public class ApplicationGestion extends JFrame {
     {
         _allInformationsNewWork = allInformationsNewWork;
         _llWork.add(_allInformationsNewWork);
+        SerializeLlWork();
     }
     public void SetJobChoiceAuthentification(Boolean jobChoiceAuthentification) {
         _jobChoiceAuthentification = jobChoiceAuthentification;
         _authenticateDone = true;
     }
 
+    public void SerializeLlWork()
+    {
+        try
+        {
+            FileOutputStream fileOutputStream = new FileOutputStream("src\\GarageHEPL_NathanFrancois\\data_allWorks.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            System.out.println("SerializeLlWork :: NORMALY SERIALIZE DATA");
+
+            for(int i =0; i < _llWork.size() ; i++)
+            {
+                System.out.println("SERIALAZING DATA Nb : " + i);
+                objectOutputStream.writeObject(_llWork.get(i));
+                objectOutputStream.flush();
+            }
+
+            objectOutputStream.close();
+            fileOutputStream.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            System.err.println("Erreur ! Fichier non trouvé [" + e + "]");
+        }
+        catch (IOException e)
+        {
+            System.err.println("Erreur ! ? [" + e + "]");
+        }
+    }
+
     public void SetJobTaken(Vector<String> jobTaken)
     {
         _jobTaken = jobTaken;
         _llWork.remove(_jobIndexToRemove);
+        SerializeLlWork();
 
         System.out.println("SetJobTaken :: _workFinishedIndex " + _workFinishedIndex);
 

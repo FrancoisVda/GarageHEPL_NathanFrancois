@@ -105,7 +105,7 @@ public class Authentification extends JDialog{
                     case "ExternalTechnician":
                         ExternalTechnician newExternalTechnician = new ExternalTechnician(st.nextToken(","),st.nextToken(","), st.nextToken(","), st.nextToken(","));
                         listPeople.put(newExternalTechnician.getFirstName(), newExternalTechnician);
-                        System.out.println("New Employee : " + newExternalTechnician.getFirstName());
+                        System.out.println("New ExternalTechnician : " + newExternalTechnician.getFirstName());
                         break;
                 }
                 i++;
