@@ -62,6 +62,7 @@ public class ApplicationGestion extends JFrame {
 
         DeserializeLlWorks();
         DeserializeCurrentWorks();
+        DeserializeFinishedWorks();
     }
 
     private void MenuBar()
@@ -269,21 +270,21 @@ public class ApplicationGestion extends JFrame {
     {
         _allInformationsNewWork = allInformationsNewWork;
         _llWork.add(_allInformationsNewWork);
-        SerializeLlWork();
+        SerializeWork("src\\GarageHEPL_NathanFrancois\\data_appointmentWorks.txt", _llWork);
     }
 
-    public void SerializeLlWork()
+    public void SerializeWork(String filePath, LinkedList<Vector<String>> works)
     {
         try
         {
-            FileOutputStream fileOutputStream = new FileOutputStream("src\\GarageHEPL_NathanFrancois\\data_allWorks.txt");
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            System.out.println("SerializeLlWork :: NORMALY SERIALIZE DATA");
+            System.out.println("SerializeWork...");
 
-            for(int i =0; i < _llWork.size() ; i++)
+            for(int i =0; i < works.size() ; i++)
             {
                 System.out.println("SERIALAZING DATA Nb : " + i);
-                objectOutputStream.writeObject(_llWork.get(i));
+                objectOutputStream.writeObject(works.get(i));
                 objectOutputStream.flush();
             }
 
@@ -332,14 +333,44 @@ public class ApplicationGestion extends JFrame {
     {
         try
         {
-            System.out.println("Lecture du fichier");
-            FileInputStream fileInputStream = new FileInputStream("src\\GarageHEPL_NathanFrancois\\data_allWorks.txt");
+            System.out.println("Lecture du fichier - data_appointmentWorks");
+            FileInputStream fileInputStream = new FileInputStream("src\\GarageHEPL_NathanFrancois\\data_appointmentWorks.txt");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             Vector<String> newWork = new Vector<>();
 
             while (fileInputStream.available() > 0) {
                 newWork = (Vector<String>) objectInputStream.readObject();
                 _llWork.add(newWork);
+            }
+            fileInputStream.close();
+            objectInputStream.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            System.err.println("Erreur (INIT - APP GESTION) ! Fichier non trouvé [" + e + "]");
+        }
+        catch (IOException e)
+        {
+            System.err.println("Erreur ! ? [" + e + "]");
+        }
+        catch (ClassNotFoundException e)
+        {
+            System.err.println("Erreur ! Classe non trouvée [" + e + "]");
+        }
+    }
+
+    public void DeserializeFinishedWorks()
+    {
+        try
+        {
+            System.out.println("Lecture du fichier - data_finishedWorks");
+            FileInputStream fileInputStream = new FileInputStream("src\\GarageHEPL_NathanFrancois\\data_finishedWorks.txt");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            Vector<String> work = new Vector<>();
+
+            while (fileInputStream.available() > 0) {
+                work = (Vector<String>) objectInputStream.readObject();
+                _finishedWorks.add(work);
             }
             fileInputStream.close();
             objectInputStream.close();
@@ -414,7 +445,7 @@ public class ApplicationGestion extends JFrame {
     {
         _jobTaken = jobTaken;
         _llWork.remove(_jobIndexToRemove);
-        SerializeLlWork();
+        SerializeWork("src\\GarageHEPL_NathanFrancois\\data_appointmentWorks.txt", _llWork);
 
         System.out.println("SetJobTaken :: _workFinishedIndex " + _workFinishedIndex);
 
@@ -482,6 +513,8 @@ public class ApplicationGestion extends JFrame {
         _workFinishedIndex = workFinishedIndex;
 
         _finishedWorks.add(_currentWorks.get(_workFinishedIndex));
+        SerializeWork("src\\GarageHEPL_NathanFrancois\\data_finishedWorks.txt", _llWork);
+
         _currentWorks.get(_workFinishedIndex).clear();
         SerializeCurrentWorks();
 
