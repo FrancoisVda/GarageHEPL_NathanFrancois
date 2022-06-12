@@ -91,6 +91,7 @@ public class ApplicationGestion extends JFrame {
         JMenuItem MI_Debuter = new JMenuItem("Pour Débuter");
         JMenuItem MI_APropos = new JMenuItem("A Propos");
         JMenuItem MI_FormatDate = new JMenuItem("Format Date");
+        JMenuItem MI_CommandePieces = new JMenuItem("Commande Pieces");
 
         MI_Prevoir.addActionListener(new ActionListener() {
             @Override
@@ -208,6 +209,15 @@ public class ApplicationGestion extends JFrame {
             }
         });
 
+        MI_CommandePieces.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                Commande Commande = new Commande(ApplicationGestion.this, true);
+                Commande.setVisible(true);
+            }
+        });
+
         MI_Infos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -246,6 +256,7 @@ public class ApplicationGestion extends JFrame {
         M_Materiel.add(MI_CentralePieces);
         M_Materiel.add(MI_CentralePneus);
         M_Materiel.add(MI_CentraleLubrifiants);
+        M_Materiel.add(MI_CommandePieces);
 
         M_Parametres.add(MI_Infos);
         M_Parametres.add(MI_FormatDate);

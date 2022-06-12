@@ -1,14 +1,18 @@
 package GarageHEPL_NathanFrancois;
 
+import network.*;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ApplicationCentrale extends JDialog {
     private JCheckBox CB_MessageEntrant;
     private JButton B_Lire;
     private JComboBox CB_Commande;
     private JTextPane TP_Commande;
-    private JTextField TF_JSP;
+    private JTextField TF_ApercuCommande;
     private JTextArea TA_DetailsCommande;
     private JButton B_VerificationDispo;
     private JRadioButton RB_Disponible;
@@ -17,9 +21,24 @@ public class ApplicationCentrale extends JDialog {
     private JLabel Detaille;
     private JPanel JP_ApplicationCentrale;
 
-    public ApplicationCentrale(ApplicationGestion applicationGestion, boolean b)
+    private final NetworkBasicServer NBS;
+    private int PORT_ECOUTE = 50000;
+    public ApplicationGestion parentApplicationGestion;
+
+    public ApplicationCentrale(JFrame parent, boolean modal)
     {
-        Init();
+        super(parent, false);
+        //this.parentApplicationGestion = parent;
+        setContentPane(JP_ApplicationCentrale);
+        setMinimumSize(new Dimension(700, 370));
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        System.out.println("ici1");
+        NBS = new NetworkBasicServer(PORT_ECOUTE,CB_MessageEntrant);
+        System.out.println("ici2");
+
+        LireMessage();
+        System.out.println("ici3");
 
 //        switch(ChoixCentrale){
 //
@@ -45,13 +64,6 @@ public class ApplicationCentrale extends JDialog {
 //        }
     }
 
-    private void Init() {
-        setContentPane(JP_ApplicationCentrale);
-        setMinimumSize(new Dimension(700, 370));
-        setLocationRelativeTo(this);
-        //setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    }
-
     private void CentralePieces() {
 
     }
@@ -59,6 +71,22 @@ public class ApplicationCentrale extends JDialog {
 
     }
     private void CentraleLubrifiants() {
+
+    }
+
+    private void LireMessage()
+    {
+        B_Lire.addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                String message = NBS.getMessage();
+
+                System.out.println(message);
+                TF_ApercuCommande.setText(message);
+            }
+        });
 
     }
 
