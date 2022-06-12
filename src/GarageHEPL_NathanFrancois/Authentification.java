@@ -26,6 +26,7 @@ public class Authentification extends JDialog{
     public ApplicationGestion parentApplicationGestion;
     Hashtable listPeople;
     private FileLog fileLog = new FileLog("garageHepl.log");
+    String _data_appointmentWorks_filePath;
 
     public Authentification(ApplicationGestion parent, boolean modal)
     {
@@ -69,23 +70,33 @@ public class Authentification extends JDialog{
                 dispose();
             }
         });
+
+        try (InputStream input = new FileInputStream("src\\GarageHEPL_NathanFrancois\\config.properties"))
+        {
+            Properties propUsers = new Properties();
+            propUsers.load(input);
+            _data_appointmentWorks_filePath = propUsers.getProperty("data_appointmentWorks_filePath");
+            fileLog.writeLine("[Authentification] - Init", "Path : " + _data_appointmentWorks_filePath);
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void DeserializeUsersProperties()
     {
         listPeople = new Hashtable();
 
-        try (InputStream input = new FileInputStream("src\\GarageHEPL_NathanFrancois\\users.properties")) {
+        try (InputStream input = new FileInputStream(_data_appointmentWorks_filePath))
+        {
+            Properties propUsers = new Properties();
+            propUsers.load(input);
 
-            Properties prop = new Properties();
-            prop.load(input);
-
-            Iterator it = prop.keySet().iterator();
+            Iterator it = propUsers.keySet().iterator();
 
             int i =0;
             while (it.hasNext()) {
-                StringTokenizer st = new StringTokenizer(prop.getProperty("users" + i));
-
+                StringTokenizer st = new StringTokenizer(propUsers.getProperty("users" + i));
                 String userType = st.nextToken(",");
 
                 switch (userType)

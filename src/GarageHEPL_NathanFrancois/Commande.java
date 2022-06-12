@@ -3,9 +3,13 @@ package GarageHEPL_NathanFrancois;
 import network.*;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.StringTokenizer;
+import java.util.Vector;
 
 public class Commande extends JDialog {
     private JTextField TF_Libelle;
@@ -17,12 +21,13 @@ public class Commande extends JDialog {
     private JRadioButton RB_Normal;
     private JRadioButton RB_NonPrioritaire;
     private JPanel JP_Commande;
-    private JTable table1;
+    private JTable JT_Command;
 
     String _CommandeEnvoye;
     String _Priorite;
     private final NetworkBasicClient NBC;
     private int PORT_SERVICE = 50000;
+    public LinkedList<String> _allCommands = new LinkedList<>();
 
     public ApplicationGestion parentApplicationGestion;
 
@@ -81,7 +86,13 @@ public class Commande extends JDialog {
                 if(RB_Normal.isSelected()){_Priorite = "Normal";}
                 if(RB_NonPrioritaire.isSelected()){_Priorite = "NonPriortaire";}
 
-                _CommandeEnvoye = (TF_Libelle.getText() + "-" + TF_Type.getText() + "-" + TF_Quantite.getText() + "-" + _Priorite);
+                _CommandeEnvoye = (TF_Libelle.getText() + "-" + TF_Type.getText() + "-" + TF_Quantite.getText() +"-" + _Priorite);
+                _allCommands.add(_CommandeEnvoye);
+
+                Commande.CommandTableModel commandTableModel = new Commande.CommandTableModel(_allCommands);
+                JT_Command.setModel(commandTableModel);
+                JT_Command.setAutoCreateRowSorter(true);
+
                 NBC.sendStringWithoutWaiting(_CommandeEnvoye);
             }
         });
@@ -95,4 +106,52 @@ public class Commande extends JDialog {
             }
         });
     }
+
+    public static class CommandTableModel extends AbstractTableModel {
+
+        private final String[] COLUMNS = {"Libellé", "Type", "Quantié", "Priorité"};
+        private LinkedList<String> allCommands = new LinkedList<>();
+
+        public CommandTableModel(LinkedList<String> allCommands) {
+            this.allCommands = allCommands;
+        }
+
+        @Override
+        public int getRowCount() {
+            return allCommands.size();
+        }
+
+        @Override
+        public int getColumnCount() {
+            return COLUMNS.length;
+        }
+
+        @Override
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            StringTokenizer st = new StringTokenizer(allCommands.get(rowIndex));
+            String libelle = st.nextToken("-");
+            String type = st.nextToken("-");
+            String quantite = st.nextToken("-");
+            String priorite = st.nextToken("-");
+
+            switch (columnIndex)
+            {
+                case 0:
+                    return libelle;
+                case 1:
+                    return type;
+                case 2:
+                    return quantite;
+                case 3:
+                    return priorite;
+                default: return "-";
+            }
+        }
+
+        @Override
+        public String getColumnName(int column) {
+            return COLUMNS[column];
+        }
+    }
+
 }
