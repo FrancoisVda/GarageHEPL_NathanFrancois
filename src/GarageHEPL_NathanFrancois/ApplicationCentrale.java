@@ -1,5 +1,6 @@
 package GarageHEPL_NathanFrancois;
 
+import com.sun.javafx.binding.StringFormatter;
 import network.*;
 
 import javax.swing.*;
@@ -32,13 +33,8 @@ public class ApplicationCentrale extends JDialog {
         setContentPane(JP_ApplicationCentrale);
         setMinimumSize(new Dimension(700, 370));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        System.out.println("ici1");
         NBS = new NetworkBasicServer(PORT_ECOUTE,CB_MessageEntrant);
-        System.out.println("ici2");
-
         LireMessage();
-        System.out.println("ici3");
 
 //        switch(ChoixCentrale){
 //
@@ -85,11 +81,23 @@ public class ApplicationCentrale extends JDialog {
 
                 System.out.println(message);
                 TF_ApercuCommande.setText(message);
+
+                String[] lines = message.split("-");
+                System.out.println("Lines0 : "+ lines[0]);
+                System.out.println("Lines1 : "+ lines[1]);
+                System.out.println("Lines2 : "+ lines[2]);
+                System.out.println("Lines3 : "+ lines[3]);
+
+
+
+
+                CB_Commande.addItem(lines[0] + " (" + lines[1]);
+
+
+
             }
         });
-
     }
-
 }
 
 

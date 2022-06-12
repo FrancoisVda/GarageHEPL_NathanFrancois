@@ -1,0 +1,38 @@
+[Sun Jun 12 16:33:33 CEST 2022] : [ApplicationGestion] - DeserializeLlWorks> Désérialisation des rendez-vous
+[Sun Jun 12 16:33:33 CEST 2022] : [ApplicationGestion] - DeserializeCurrentWorks> Désérialisation des travaux en cours
+[Sun Jun 12 16:33:33 CEST 2022] : [ApplicationGestion] - DeserializeFinishedWorks> Désérialisation des travaux terminés
+[Sun Jun 12 16:33:33 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Francois
+[Sun Jun 12 16:33:33 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Jean
+[Sun Jun 12 16:33:33 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Nathan
+[Sun Jun 12 16:33:33 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Feri
+[Sun Jun 12 16:47:51 CEST 2022] : [ApplicationGestion] - DeserializeLlWorks> Désérialisation des rendez-vous
+[Sun Jun 12 16:47:51 CEST 2022] : [ApplicationGestion] - DeserializeCurrentWorks> Désérialisation des travaux en cours
+[Sun Jun 12 16:47:51 CEST 2022] : [ApplicationGestion] - DeserializeFinishedWorks> Désérialisation des travaux terminés
+[Sun Jun 12 16:47:51 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Francois
+[Sun Jun 12 16:47:51 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Jean
+[Sun Jun 12 16:47:51 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Nathan
+[Sun Jun 12 16:47:51 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Feri
+[Sun Jun 12 16:54:30 CEST 2022] : [ApplicationGestion] - DeserializeLlWorks> Désérialisation des rendez-vous
+[Sun Jun 12 16:54:30 CEST 2022] : [ApplicationGestion] - DeserializeCurrentWorks> Désérialisation des travaux en cours
+[Sun Jun 12 16:54:30 CEST 2022] : [ApplicationGestion] - DeserializeFinishedWorks> Désérialisation des travaux terminés
+[Sun Jun 12 16:54:30 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Francois
+[Sun Jun 12 16:54:30 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Jean
+[Sun Jun 12 16:54:30 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Nathan
+[Sun Jun 12 16:54:30 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Feri
+[Sun Jun 12 16:54:36 CEST 2022] : [Authentification] - AuthentificationUser> L'utilisateur existe.
+[Sun Jun 12 16:54:36 CEST 2022] : [Authentification] - AuthentificationUser> Mécanicien connecté
+[Sun Jun 12 16:54:36 CEST 2022] : [ApplicationGestion] - DeserializeLlWorks> Désérialisation des rendez-vous
+[Sun Jun 12 16:54:36 CEST 2022] : [ApplicationGestion] - DeserializeCurrentWorks> Désérialisation des travaux en cours
+[Sun Jun 12 16:54:36 CEST 2022] : [ApplicationGestion] - DeserializeFinishedWorks> Désérialisation des travaux terminés
+[Sun Jun 12 16:57:45 CEST 2022] : [ApplicationGestion] - DeserializeLlWorks> Désérialisation des rendez-vous
+[Sun Jun 12 16:57:45 CEST 2022] : [ApplicationGestion] - DeserializeCurrentWorks> Désérialisation des travaux en cours
+[Sun Jun 12 16:57:45 CEST 2022] : [ApplicationGestion] - DeserializeFinishedWorks> Désérialisation des travaux terminés
+[Sun Jun 12 16:57:45 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Francois
+[Sun Jun 12 16:57:45 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Jean
+[Sun Jun 12 16:57:45 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Nathan
+[Sun Jun 12 16:57:45 CEST 2022] : [Authentification] - DeserializeUsersProperties> New mechanic : Feri
+[Sun Jun 12 16:57:56 CEST 2022] : [Authentification] - AuthentificationUser> L'utilisateur existe.
+[Sun Jun 12 16:57:56 CEST 2022] : [Authentification] - AuthentificationUser> Mécanicien connecté
+[Sun Jun 12 16:57:56 CEST 2022] : [ApplicationGestion] - DeserializeLlWorks> Désérialisation des rendez-vous
+[Sun Jun 12 16:57:56 CEST 2022] : [ApplicationGestion] - DeserializeCurrentWorks> Désérialisation des travaux en cours
+[Sun Jun 12 16:57:56 CEST 2022] : [ApplicationGestion] - DeserializeFinishedWorks> Désérialisation des travaux terminés

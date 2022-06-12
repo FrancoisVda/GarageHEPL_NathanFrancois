@@ -81,9 +81,8 @@ public class Commande extends JDialog {
                 if(RB_Normal.isSelected()){_Priorite = "Normal";}
                 if(RB_NonPrioritaire.isSelected()){_Priorite = "NonPriortaire";}
 
-                _CommandeEnvoye = ("Libelle:" + TF_Libelle.getText() + "-Type:" + TF_Type.getText() + "-Quantité:" + TF_Quantite.getText() +"-Priorité:" + _Priorite);
+                _CommandeEnvoye = (TF_Libelle.getText() + "-" + TF_Type.getText() + "-" + TF_Quantite.getText() + "-" + _Priorite);
                 NBC.sendStringWithoutWaiting(_CommandeEnvoye);
-                System.out.println("bite");
             }
         });
 
