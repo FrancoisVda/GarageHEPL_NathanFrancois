@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Hashtable;
@@ -23,9 +22,6 @@ public class Authentification extends JDialog{
     private JButton B_OK;
     private JButton B_Annuler;
     private JPasswordField PF_Password;
-
-    private Boolean _jobChoiceAuthentification;
-
     public ApplicationGestion parentApplicationGestion;
     Hashtable listPeople;
 
@@ -34,7 +30,7 @@ public class Authentification extends JDialog{
         super(parent, modal);
         this.parentApplicationGestion = parent;
         Init(parent, modal);
-        InsertData();
+        DeserializeUsersProperties();
     }
 
     private void Init(JFrame parent, boolean modal)
@@ -73,7 +69,7 @@ public class Authentification extends JDialog{
         });
     }
 
-    private void InsertData()
+    private void DeserializeUsersProperties()
     {
         listPeople = new Hashtable();
 
@@ -105,7 +101,7 @@ public class Authentification extends JDialog{
                     case "ExternalTechnician":
                         ExternalTechnician newExternalTechnician = new ExternalTechnician(st.nextToken(","),st.nextToken(","), st.nextToken(","), st.nextToken(","));
                         listPeople.put(newExternalTechnician.getFirstName(), newExternalTechnician);
-                        System.out.println("New Employee : " + newExternalTechnician.getFirstName());
+                        System.out.println("New ExternalTechnician : " + newExternalTechnician.getFirstName());
                         break;
                 }
                 i++;
