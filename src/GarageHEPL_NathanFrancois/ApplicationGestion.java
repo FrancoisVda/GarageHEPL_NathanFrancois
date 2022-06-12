@@ -5,6 +5,7 @@ import Vehicle.Car;
 import Vehicle.CarType;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +31,9 @@ public class ApplicationGestion extends JFrame {
 
     private JLabel L_Image;
 
+    String _Pays;
+    String _FormatDate;
+    String _FormatTemps;
     private Vector<String> _allInformationsNewWork = new Vector<>();
     LinkedList<Vector<String>> _llWork = new LinkedList<>();
     private Vector<String> _jobTaken = new Vector<>();
@@ -50,7 +54,7 @@ public class ApplicationGestion extends JFrame {
     {
         Init();
         MenuBar();
-        TimeDisplay();
+        SetTimeDisplay("fr-FR","0","0");
         InsertData();
     }
 
@@ -84,6 +88,7 @@ public class ApplicationGestion extends JFrame {
         JMenuItem MI_Infos = new JMenuItem("Infos Système");
         JMenuItem MI_Debuter = new JMenuItem("Pour Débuter");
         JMenuItem MI_APropos = new JMenuItem("A Propos");
+        JMenuItem MI_FormatDate = new JMenuItem("Format Date");
 
         MI_Prevoir.addActionListener(new ActionListener() {
             @Override
@@ -213,6 +218,15 @@ public class ApplicationGestion extends JFrame {
             }
         });
 
+        MI_FormatDate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                FormatDate FormatDate = new FormatDate(ApplicationGestion.this, true);
+                FormatDate.setVisible(true);
+            }
+        });
+
         M_Atelier.add(MI_Prevoir);
         M_Atelier.add(MI_PriseCharge);
         M_Atelier.add(MI_Termine);
@@ -224,6 +238,7 @@ public class ApplicationGestion extends JFrame {
         M_Materiel.add(MI_CentraleLubrifiants);
 
         M_Parametres.add(MI_Infos);
+        M_Parametres.add(MI_FormatDate);
 
         M_Aide.add(MI_Debuter);
         M_Aide.add(MI_APropos);
@@ -257,13 +272,21 @@ public class ApplicationGestion extends JFrame {
         listCar.put(NissanQuashqai.getRegistration(), NissanQuashqai);
     }
 
-    private void TimeDisplay()
+    public void SetTimeDisplay(String Pays, String FormatDate ,String FormatTemps)
     {
-        Date today = new Date();
-        DateFormat shortDateFormat = DateFormat.getDateTimeInstance(
-                DateFormat.SHORT,
-                DateFormat.SHORT);
-        TF_Date.setText(shortDateFormat.format(today));
+        _Pays = Pays;
+        _FormatDate = FormatDate;
+        _FormatTemps = FormatTemps;
+        Timer t = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TF_Date.setText(DateFormat.getDateTimeInstance(Integer.parseInt(_FormatDate), Integer.parseInt(_FormatTemps), Locale.forLanguageTag(_Pays)).format(new Date()));
+            }
+        });
+        t.setRepeats(true);
+        t.setCoalesce(true);
+        t.setInitialDelay(0);
+        t.start();
     }
 
     public void SetAllInformationNewWork(Vector<String> allInformationsNewWork)
