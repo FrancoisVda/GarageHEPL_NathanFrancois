@@ -1,5 +1,6 @@
 package GarageHEPL_NathanFrancois;
 
+import MyVariousUtils.FileLog;
 import People.Customer;
 import Vehicle.Car;
 import Vehicle.CarType;
@@ -41,6 +42,7 @@ public class ApplicationGestion extends JFrame {
     LinkedList<Boolean> _locationFree = new LinkedList<Boolean>();
     private int _jobIndexToRemove = 0;
     private int _workFinishedIndex = 0;
+    private FileLog fileLog = new FileLog("garageHepl.log");
 
 
     public ApplicationGestion() {
@@ -90,6 +92,7 @@ public class ApplicationGestion extends JFrame {
             public void actionPerformed(ActionEvent e)
             {
                 NewWork newWork = new NewWork(ApplicationGestion.this,true);
+                fileLog.writeLine("[ApplicationGestion] - MenuBar", "Lancement de la fenêtre Nouveau Travail");
                 newWork.setVisible(true);
             }
         });
@@ -101,10 +104,12 @@ public class ApplicationGestion extends JFrame {
                 if(_llWork.isEmpty())
                 {
                     JOptionPane.showMessageDialog(ApplicationGestion.this, "Aucun travail à prévoir", "Réessayer", JOptionPane.ERROR_MESSAGE);
+                    fileLog.writeLine("[ApplicationGestion] - MenuBar", "Aucun travail à prévoir");
                 }
                 else
                 {
                     TakingOverJob takingOverJob = new TakingOverJob(ApplicationGestion.this,true);
+                    fileLog.writeLine("[ApplicationGestion] - MenuBar", "Lancement de la fenêtre Prendre En Charge Un Travail");
                     takingOverJob.setVisible(true);
                 }
             }
@@ -124,11 +129,13 @@ public class ApplicationGestion extends JFrame {
 
                 if(isEmpty)
                 {
-                    JOptionPane.showMessageDialog(ApplicationGestion.this, "Aucun travail en cours", "Réessayer", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(ApplicationGestion.this, "Aucun travaux en cours", "Réessayer", JOptionPane.ERROR_MESSAGE);
+                    fileLog.writeLine("[ApplicationGestion] - MenuBar", "Aucun travaux en cours");
                 }
                 else
                 {
                     FinishWork finishWork = new FinishWork(ApplicationGestion.this, true);
+                    fileLog.writeLine("[ApplicationGestion] - MenuBar", "Lancement de la fenêtre Terminer Travail");
                     finishWork.setVisible(true);
                 }
 
@@ -140,6 +147,7 @@ public class ApplicationGestion extends JFrame {
             public void actionPerformed(ActionEvent e)
             {;
                 About About = new About(ApplicationGestion.this,true);
+                fileLog.writeLine("[ApplicationGestion] - MenuBar", "Lancement de la fenêtre A propos");
                 About.setVisible(true);
             }
         });
@@ -200,6 +208,7 @@ public class ApplicationGestion extends JFrame {
             public void actionPerformed(ActionEvent e)
             {
                 InfoSysteme InfoSysteme = new InfoSysteme(ApplicationGestion.this, true);
+                fileLog.writeLine("[ApplicationGestion] - MenuBar", "Lancement de la fenêtre Info Système");
                 InfoSysteme.setVisible(true);
             }
         });
@@ -209,6 +218,7 @@ public class ApplicationGestion extends JFrame {
             public void actionPerformed(ActionEvent e)
             {
                 ForStart ForStart = new ForStart(ApplicationGestion.this, true);
+                fileLog.writeLine("[ApplicationGestion] - MenuBar", "Lancement de la fenêtre Pour débuter");
                 ForStart.setVisible(true);
             }
         });
@@ -271,6 +281,7 @@ public class ApplicationGestion extends JFrame {
         _allInformationsNewWork = allInformationsNewWork;
         _llWork.add(_allInformationsNewWork);
         SerializeWork("src\\GarageHEPL_NathanFrancois\\data_appointmentWorks.txt", _llWork);
+        fileLog.writeLine("[ApplicationGestion] - SerializeWork", "Sérialisation des rendez-vous");
     }
 
     public void SerializeWork(String filePath, LinkedList<Vector<String>> works)
@@ -279,11 +290,9 @@ public class ApplicationGestion extends JFrame {
         {
             FileOutputStream fileOutputStream = new FileOutputStream(filePath);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            System.out.println("SerializeWork...");
 
             for(int i =0; i < works.size() ; i++)
             {
-                System.out.println("SERIALAZING DATA Nb : " + i);
                 objectOutputStream.writeObject(works.get(i));
                 objectOutputStream.flush();
             }
@@ -307,11 +316,9 @@ public class ApplicationGestion extends JFrame {
         {
             FileOutputStream fileOutputStream = new FileOutputStream("src\\GarageHEPL_NathanFrancois\\data_currentWorks.txt");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            System.out.println("SerializeCurrentWorks :: NORMALY SERIALIZE DATA");
-
+            fileLog.writeLine("[ApplicationGestion] - SerializeCurrentWorks", "Sérialisation des travaux en cours");
             for(int i =0; i < _currentWorks.size() ; i++)
             {
-                System.out.println("SERIALAZING DATA Nb : " + i);
                 objectOutputStream.writeObject(_currentWorks.get(i));
                 objectOutputStream.flush();
             }
@@ -337,6 +344,7 @@ public class ApplicationGestion extends JFrame {
             FileInputStream fileInputStream = new FileInputStream("src\\GarageHEPL_NathanFrancois\\data_appointmentWorks.txt");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             Vector<String> newWork = new Vector<>();
+            fileLog.writeLine("[ApplicationGestion] - DeserializeLlWorks", "Désérialisation des rendez-vous");
 
             while (fileInputStream.available() > 0) {
                 newWork = (Vector<String>) objectInputStream.readObject();
@@ -367,6 +375,7 @@ public class ApplicationGestion extends JFrame {
             FileInputStream fileInputStream = new FileInputStream("src\\GarageHEPL_NathanFrancois\\data_finishedWorks.txt");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             Vector<String> work = new Vector<>();
+            fileLog.writeLine("[ApplicationGestion] - DeserializeFinishedWorks", "Désérialisation des travaux terminés");
 
             while (fileInputStream.available() > 0) {
                 work = (Vector<String>) objectInputStream.readObject();
@@ -397,6 +406,7 @@ public class ApplicationGestion extends JFrame {
             FileInputStream fileInputStream = new FileInputStream("src\\GarageHEPL_NathanFrancois\\data_currentWorks.txt");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             Vector<String> newCurrentWork = new Vector<>();
+            fileLog.writeLine("[ApplicationGestion] - DeserializeCurrentWorks", "Désérialisation des travaux en cours");
 
             int i = 0;
             while (fileInputStream.available() > 0) {
@@ -446,8 +456,7 @@ public class ApplicationGestion extends JFrame {
         _jobTaken = jobTaken;
         _llWork.remove(_jobIndexToRemove);
         SerializeWork("src\\GarageHEPL_NathanFrancois\\data_appointmentWorks.txt", _llWork);
-
-        System.out.println("SetJobTaken :: _workFinishedIndex " + _workFinishedIndex);
+        fileLog.writeLine("[ApplicationGestion] - SerializeWork", "Sérialisation des travaux en cours");
 
         switch(_jobLocation)
         {
@@ -476,19 +485,16 @@ public class ApplicationGestion extends JFrame {
                 break;
         }
         SerializeCurrentWorks();
-
     }
 
     public void SetJobLocation(int jobLocation)
     {
         _jobLocation = jobLocation;
-        System.out.println("SetJobLocation :: jobLocation " + _jobLocation);
     }
 
     public void SetJobIndexToRemove(int jobIndexToRemove)
     {
         _jobIndexToRemove = jobIndexToRemove;
-        System.out.println("SetJobIndexToRemove :: jobIndexToRemove " + _jobIndexToRemove);
     }
 
     public LinkedList<Vector<String>> GetLlWork()
@@ -498,27 +504,20 @@ public class ApplicationGestion extends JFrame {
 
     public Vector<Vector<String>> GetCurrentWorks()
     {
-        Enumeration enu = _currentWorks.elements();
-        System.out.println("GetCurrentWorks::AppliGestion::  Before sending :");
-
-        // Displaying the Enumeration
-        while (enu.hasMoreElements()) {
-            System.out.println("ELEMENT : " + enu.nextElement());
-        }
         return _currentWorks;
     }
 
     public void SetWorkFinishedIndex(int workFinishedIndex)
     {
         _workFinishedIndex = workFinishedIndex;
-
         _finishedWorks.add(_currentWorks.get(_workFinishedIndex));
-        SerializeWork("src\\GarageHEPL_NathanFrancois\\data_finishedWorks.txt", _llWork);
+
+        SerializeWork("src\\GarageHEPL_NathanFrancois\\data_finishedWorks.txt", _finishedWorks);
+        fileLog.writeLine("[ApplicationGestion] - SerializeWork", "Désérialisation des travaux terminés");
 
         _currentWorks.get(_workFinishedIndex).clear();
         SerializeCurrentWorks();
 
-        System.out.println("INDEX TO REMOVE FINISHED WORK " + _workFinishedIndex);
         switch (_workFinishedIndex)
         {
             case 0:
@@ -540,8 +539,6 @@ public class ApplicationGestion extends JFrame {
     {
         _locationFree.clear();
 
-        System.out.println("TF PONT 1 : " + TF_Pont1.getText());
-
         if(TF_Pont1.getText().equals("-- libre --"))
         {
             _locationFree.add(true);
@@ -551,7 +548,6 @@ public class ApplicationGestion extends JFrame {
             _locationFree.add(false);
         }
 
-        System.out.println("TF PONT 2 : " + TF_Pont2.getText());
         if(TF_Pont2.getText().equals("-- libre --"))
         {
             _locationFree.add(true);

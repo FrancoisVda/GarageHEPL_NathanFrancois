@@ -1,5 +1,6 @@
 package GarageHEPL_NathanFrancois;
 
+import MyVariousUtils.FileLog;
 import People.Customer;
 
 import javax.swing.*;
@@ -22,7 +23,7 @@ public class NewWork extends JDialog {
     private JButton B_OK;
     private JButton B_Cancel;
     private JTextField TF_Registration;
-
+    private FileLog fileLog = new FileLog("garageHepl.log");
     private Vector<String> _allInformations = new Vector<>();
     public ApplicationGestion parentApplicationGestion;
 
@@ -43,7 +44,6 @@ public class NewWork extends JDialog {
         setLocationRelativeTo(this);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        // ACTION //
         B_OK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,7 +78,6 @@ public class NewWork extends JDialog {
                 addCustommer();
             }
         });
-        // ACTION //
     }
 
     private void InsertData()
@@ -116,6 +115,7 @@ public class NewWork extends JDialog {
         if(registration.isEmpty() || carType.isEmpty() || owner.isEmpty() || workType.isEmpty())
         {
             JOptionPane.showMessageDialog(this, "Information manquante", "Réessayer", JOptionPane.ERROR_MESSAGE);
+            fileLog.writeLine("[NewWork] - addNewWork", "Information manquante");
             return;
         }
 
@@ -124,10 +124,6 @@ public class NewWork extends JDialog {
         String type = st.nextToken("-");
         String door = st.nextToken("-");
 
-        System.out.println("[" + brand + ", " + type + ", " + door + "]");
-        System.out.println("PLAQUE BELGE : " + belgianRegistration.toString());
-
-        //TODO CREATE VECTOR TO RETURN TO APPLICATIONGESTION
         _allInformations.add(brand);
         _allInformations.add(type);
         _allInformations.add(door);
@@ -158,7 +154,7 @@ public class NewWork extends JDialog {
 
     private void maitenanceIsSelected()
     {
-        if(RB_Repair.isSelected() == true)
+        if(RB_Repair.isSelected())
             RB_Repair.setSelected(false);
 
         CB_WorkType.removeAllItems();
@@ -181,22 +177,5 @@ public class NewWork extends JDialog {
         CB_WorkType.addItem("Flanc droit");
         CB_WorkType.addItem("Frein");
     }
-
-//    public static void main(String[] args)
-//    {
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                NewWork dialog = new NewWork(new javax.swing.JFrame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//            }
-//        });
-//    }
-
 
 }

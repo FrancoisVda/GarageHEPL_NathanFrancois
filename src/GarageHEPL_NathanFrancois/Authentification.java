@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
+import MyVariousUtils.FileLog;
 import People.*;
 
 public class Authentification extends JDialog{
@@ -24,6 +25,7 @@ public class Authentification extends JDialog{
     private JPasswordField PF_Password;
     public ApplicationGestion parentApplicationGestion;
     Hashtable listPeople;
+    private FileLog fileLog = new FileLog("garageHepl.log");
 
     public Authentification(ApplicationGestion parent, boolean modal)
     {
@@ -92,16 +94,19 @@ public class Authentification extends JDialog{
                         Mechanic newMechanic = new Mechanic(st.nextToken(","), st.nextToken(","), st.nextToken(","), st.nextToken(","), st.nextToken(","), st.nextToken(","), st.nextToken(","));
                         listPeople.put(newMechanic.getFirstName(), newMechanic);
                         System.out.println("New mechanic : " + newMechanic.getFirstName());
+                        fileLog.writeLine("[Authentification] - DeserializeUsersProperties", "New mechanic : " + newMechanic.getFirstName());
                         break;
                     case "Employee":
                         Employee newEmployee = new Employee(st.nextToken(","),st.nextToken(","), st.nextToken(","), st.nextToken(","), st.nextToken(","), st.nextToken(","));
                         listPeople.put(newEmployee.getFirstName(), newEmployee);
                         System.out.println("New Employee : " + newEmployee.getFirstName());
+                        fileLog.writeLine("[Authentification] - DeserializeUsersProperties", "New mechanic : " + newEmployee.getFirstName());
                         break;
                     case "ExternalTechnician":
                         ExternalTechnician newExternalTechnician = new ExternalTechnician(st.nextToken(","),st.nextToken(","), st.nextToken(","), st.nextToken(","));
                         listPeople.put(newExternalTechnician.getFirstName(), newExternalTechnician);
                         System.out.println("New ExternalTechnician : " + newExternalTechnician.getFirstName());
+                        fileLog.writeLine("[Authentification] - DeserializeUsersProperties", "New mechanic : " + newExternalTechnician.getFirstName());
                         break;
                 }
                 i++;
@@ -120,12 +125,14 @@ public class Authentification extends JDialog{
         if(listPeople.containsKey(user))
         {
             System.out.println("L'utilisateur existe !");
+            fileLog.writeLine("[Authentification] - AuthentificationUser", "L'utilisateur existe.");
 
             if(listPeople.get(user).getClass() == ExternalTechnician.class || ((GarageStaff)listPeople.get(user)).isValid(password))
             {
                 if(RB_MembreDuPersonnel.isSelected() && listPeople.get(user).getClass() == Mechanic.class)
                 {
                     System.out.println("Méchanicien");
+                    fileLog.writeLine("[Authentification] - AuthentificationUser", "Mécanicien connecté");
                     this.dispose();
                     ApplicationGestion applicationGestion = new ApplicationGestion();
                     applicationGestion.setVisible(true);
@@ -134,6 +141,7 @@ public class Authentification extends JDialog{
                 else if(RB_MembreDuPersonnel.isSelected() && listPeople.get(user).getClass() == Employee.class)
                 {
                     System.out.println("Employé");
+                    fileLog.writeLine("[Authentification] - AuthentificationUser", "Employé connecté");
                     this.dispose();
                     ApplicationGestion applicationGestion = new ApplicationGestion();
                     applicationGestion.setVisible(true);
@@ -142,6 +150,7 @@ public class Authentification extends JDialog{
                 else if(RB_ExterieurHabilite.isSelected() && listPeople.get(user).getClass() == ExternalTechnician.class)
                 {
                     System.out.println("Extérieur Habilité");
+                    fileLog.writeLine("[Authentification] - AuthentificationUser", "Extérieur Habilité connecté");
                     this.dispose();
                     ApplicationGestion applicationGestion = new ApplicationGestion();
                     applicationGestion.setVisible(true);
@@ -150,6 +159,7 @@ public class Authentification extends JDialog{
                 else
                 {
                     JOptionPane.showMessageDialog(this, "Poste Incorrecte", "Réessayer", JOptionPane.ERROR_MESSAGE);
+                    fileLog.writeLine("[Authentification] - AuthentificationUser", "Poste incorrecte entré");
                     if(RB_MembreDuPersonnel.isSelected())
                     {
                         RB_MembreDuPersonnel.setSelected(false);
@@ -165,16 +175,19 @@ public class Authentification extends JDialog{
             else
             {
                 JOptionPane.showMessageDialog(this, "Mot de passe érroné !", "Réessayer", JOptionPane.ERROR_MESSAGE);
+                fileLog.writeLine("[Authentification] - AuthentificationUser", "Mot de passe érroné entré");
             }
         }
         else if (user.isEmpty() || password.isEmpty())
         {
             JOptionPane.showMessageDialog(this, "Information manquante", "Réessayer", JOptionPane.ERROR_MESSAGE);
+            fileLog.writeLine("[Authentification] - AuthentificationUser", "Information manquante");
         }
         else
         {
 
             JOptionPane.showMessageDialog(this, "L'utilisateur n'existe pas !", "Réessayer", JOptionPane.ERROR_MESSAGE);
+            fileLog.writeLine("[Authentification] - AuthentificationUser", "L'utilisateur n'existe pas");
         }
     }
 }

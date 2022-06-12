@@ -1,5 +1,7 @@
 package GarageHEPL_NathanFrancois;
 
+import MyVariousUtils.FileLog;
+
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.awt.*;
@@ -16,7 +18,7 @@ public class TakingOverJob extends JDialog {
     private JButton B_Cancel;
     private JPanel JP_TakingOverJob;
     private JTable JT_WaitingWork;
-
+    private FileLog fileLog = new FileLog("garageHepl.log");
     private LinkedList<Vector<String>> _llWork = new LinkedList<>();
     public ApplicationGestion parentApplicationGestion;
     private LinkedList<Boolean> _locationFree = new LinkedList<>();
@@ -27,12 +29,6 @@ public class TakingOverJob extends JDialog {
         this.parentApplicationGestion = parent;
         _llWork= parentApplicationGestion.GetLlWork();
         Init(modal);
-
-
-        String concatCarType = _llWork.get(0).get(0);
-        concatCarType = concatCarType + " " + _llWork.get(0).get(1);
-        System.out.println("TEUB ICI " + concatCarType);
-
         InsertData();
     }
 
@@ -73,12 +69,6 @@ public class TakingOverJob extends JDialog {
             }
         });
     }
-
-
-//    public void SetLlWork(LinkedList<Vector<String>> llWork)
-//    {
-//        _llWork = llWork;
-//    }
 
     private void InsertData()
     {
@@ -174,6 +164,7 @@ public class TakingOverJob extends JDialog {
         if(!flagSomethingFree)
         {
             JOptionPane.showMessageDialog(this, "Aucun emplacement disponible", "Réessayer", JOptionPane.ERROR_MESSAGE);
+            fileLog.writeLine("[TakingOverJob] - jobSelected", "Aucun emplacement disponible");
             dispose();
             return;
         }
@@ -185,6 +176,7 @@ public class TakingOverJob extends JDialog {
             else
             {
                 JOptionPane.showMessageDialog(this, "Le sol est un emplacement occupé", "Réessayer", JOptionPane.ERROR_MESSAGE);
+                fileLog.writeLine("[TakingOverJob] - jobSelected", "Le sol est occupé");
                 return;
             }
         }
@@ -195,6 +187,7 @@ public class TakingOverJob extends JDialog {
             if(!_locationFree.get(jobLocation))
             {
                 JOptionPane.showMessageDialog(this, "L'emplacement de ce pont est occupé", "Réessayer", JOptionPane.ERROR_MESSAGE);
+                fileLog.writeLine("[TakingOverJob] - jobSelected", "Ce pont est occupé");
                 return;
             }
         }

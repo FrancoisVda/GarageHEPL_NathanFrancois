@@ -1,5 +1,7 @@
 package GarageHEPL_NathanFrancois;
 
+import MyVariousUtils.FileLog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,6 +13,7 @@ public class FinishWork extends JDialog {
     private JButton buttonOK;
     private JButton buttonCancel;
     private JComboBox CB_WorkToFinish;
+    private FileLog fileLog = new FileLog("garageHepl.log");
 
     public ApplicationGestion parentApplicationGestion;
     Vector<Vector<String>> _currentWorks = new Vector<>();
@@ -93,6 +96,7 @@ public class FinishWork extends JDialog {
         if(_currentWorks.get(CB_WorkToFinish.getSelectedIndex()).isEmpty())
         {
             JOptionPane.showMessageDialog(this, "Cet emplacement est libre", "Réessayer", JOptionPane.ERROR_MESSAGE);
+            fileLog.writeLine("[FinishWork] - onOK", "Emplacement libre");
             return;
         }
 
